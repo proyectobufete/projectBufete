@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Exoneracione</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Idexoneracion</th>
+                <td>{{ exoneracione.idExoneracion }}</td>
+            </tr>
+            <tr>
+                <th>Fechaexamen</th>
+                <td>{% if exoneracione.fechaExamen %}{{ exoneracione.fechaExamen|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Observaciones</th>
+                <td>{{ exoneracione.observaciones }}</td>
+            </tr>
+            <tr>
+                <th>Fechasolvencias</th>
+                <td>{% if exoneracione.fechasolvencias %}{{ exoneracione.fechasolvencias|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('exoneraciones_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('exoneraciones_edit', { 'idExoneracion': exoneracione.idExoneracion }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

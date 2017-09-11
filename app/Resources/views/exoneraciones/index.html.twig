@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Exoneraciones list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idexoneracion</th>
+                <th>Fechaexamen</th>
+                <th>Observaciones</th>
+                <th>Fechasolvencias</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for exoneracione in exoneraciones %}
+            <tr>
+                <td><a href="{{ path('exoneraciones_show', { 'idExoneracion': exoneracione.idExoneracion }) }}">{{ exoneracione.idExoneracion }}</a></td>
+                <td>{% if exoneracione.fechaExamen %}{{ exoneracione.fechaExamen|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ exoneracione.observaciones }}</td>
+                <td>{% if exoneracione.fechasolvencias %}{{ exoneracione.fechasolvencias|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('exoneraciones_show', { 'idExoneracion': exoneracione.idExoneracion }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('exoneraciones_edit', { 'idExoneracion': exoneracione.idExoneracion }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('exoneraciones_new') }}">Create a new exoneracione</a>
+        </li>
+    </ul>
+{% endblock %}

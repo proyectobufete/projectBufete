@@ -1,3 +1,63 @@
+bufete_paises:
+    resource: "@BufeteBundle/Resources/config/routing/paises.yml"
+    prefix:   /paises
+
 bufete_homepage:
     path:     /
     defaults: { _controller: BufeteBundle:Default:index }
+
+bufete_departamentos:
+        resource: "@BufeteBundle/Resources/config/routing/departamentos.yml"
+        prefix:   /departamentos
+
+bufete_ciudad:
+        resource: "@BufeteBundle/Resources/config/routing/ciudad.yml"
+        prefix:   /ciudad
+
+bufete_bufetes:
+        resource: "@BufeteBundle/Resources/config/routing/bufetes.yml"
+        prefix:   /bufetes
+
+bufete_estadosciviles:
+        resource: "@BufeteBundle/Resources/config/routing/estadosciviles.yml"
+        prefix:   /estadosciviles
+
+bufete_trabajos:
+        resource: "@BufeteBundle/Resources/config/routing/trabajos.yml"
+        prefix:   /trabajos
+
+bufete_demandantes:
+        resource: "@BufeteBundle/Resources/config/routing/demandantes.yml"
+        prefix:   /demandantes
+
+bufete_laborales:
+        resource: "@BufeteBundle/Resources/config/routing/laborales.yml"
+        prefix:   /laborales
+
+bufete_civiles:
+        resource: "@BufeteBundle/Resources/config/routing/civiles.yml"
+        prefix:   /civiles
+
+bufete_tribunales:
+        resource: "@BufeteBundle/Resources/config/routing/tribunales.yml"
+        prefix:   /tribunales
+
+bufete_tipocaso:
+        resource: "@BufeteBundle/Resources/config/routing/tipocaso.yml"
+        prefix:   /tipocaso
+
+bufete_clinicas:
+        resource: "@BufeteBundle/Resources/config/routing/clinicas.yml"
+        prefix:   /clinicas
+
+bufete_practicas:
+        resource: "@BufeteBundle/Resources/config/routing/practicas.yml"
+        prefix:   /practicas
+
+bufete_exoneraciones:
+        resource: "@BufeteBundle/Resources/config/routing/exoneraciones.yml"
+        prefix:   /exoneraciones
+
+bufete_casos:
+        resource: "@BufeteBundle/Resources/config/routing/casos.yml"
+        prefix:   /casos

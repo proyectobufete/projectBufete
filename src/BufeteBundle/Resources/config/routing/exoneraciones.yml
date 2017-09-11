@@ -1,0 +1,24 @@
+exoneraciones_index:
+    path:     /
+    defaults: { _controller: "BufeteBundle:Exoneraciones:index" }
+    methods:  GET
+
+exoneraciones_show:
+    path:     /{idExoneracion}/show
+    defaults: { _controller: "BufeteBundle:Exoneraciones:show" }
+    methods:  GET
+
+exoneraciones_new:
+    path:     /new
+    defaults: { _controller: "BufeteBundle:Exoneraciones:new" }
+    methods:  [GET, POST]
+
+exoneraciones_edit:
+    path:     /{idExoneracion}/edit
+    defaults: { _controller: "BufeteBundle:Exoneraciones:edit" }
+    methods:  [GET, POST]
+
+exoneraciones_delete:
+    path:     /{idExoneracion}/delete
+    defaults: { _controller: "BufeteBundle:Exoneraciones:delete" }
+    methods:  DELETE
