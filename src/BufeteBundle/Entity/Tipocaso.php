@@ -71,6 +71,11 @@ class Tipocaso
         return $this;
     }
 
+
+    public function __toString()
+      {
+       return $this->tipo;
+      }
     /**
      * Get estadoTipo
      *
@@ -81,4 +86,3 @@ class Tipocaso
         return $this->estadoTipo;
     }
 }
-

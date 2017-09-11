@@ -57,6 +57,13 @@ class Departamentos
         return $this->departamento;
     }
 
+
+    public function __toString()
+  {
+    return $this->departamento;
+  }
+
+
     /**
      * Set idPais
      *
@@ -81,4 +88,3 @@ class Departamentos
         return $this->idPais;
     }
 }
-

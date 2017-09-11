@@ -105,6 +105,11 @@ class Ciudad
         return $this;
     }
 
+
+    public function __toString()
+  {
+    return $this->ciudad;
+  }
     /**
      * Get estadoCiudad
      *
@@ -139,4 +144,3 @@ class Ciudad
         return $this->idDepartamento;
     }
 }
-

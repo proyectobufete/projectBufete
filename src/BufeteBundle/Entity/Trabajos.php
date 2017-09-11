@@ -57,6 +57,12 @@ class Trabajos
         return $this->trabajo;
     }
 
+
+    public function __toString()
+ {
+   return $this->trabajo;
+ }
+
     /**
      * Set estadoTrabajo
      *
@@ -81,4 +87,3 @@ class Trabajos
         return $this->estadoTrabajo;
     }
 }
-

@@ -309,6 +309,13 @@ class Casos
         return $this;
     }
 
+
+
+public function __toString()
+{
+return $this->asunto;
+}
+
     /**
      * Get dirnotificacionDemandado
      *
@@ -487,4 +494,3 @@ class Casos
         return $this->idTipo;
     }
 }
-
