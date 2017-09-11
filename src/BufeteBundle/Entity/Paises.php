@@ -62,12 +62,6 @@ class Paises
        return $this->pais;
      }
 
-     public function __toString()
-  {
-    return $this->pais;
-  }
-
-
     /**
      * Set estadoPais
      *
