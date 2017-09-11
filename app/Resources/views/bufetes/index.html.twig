@@ -1,19 +1,33 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
+{% block title %}
+  <h1>Listado de Bufetes</h1>
+{% endblock %}
 
 {% block body %}
-    <h1>Bufetes list</h1>
-
-    <table>
+<div class="portlet box red-pink">
+  <div class="portlet-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="btn-group">
+          <a href="{{ path('bufetes_new') }}">
+											<button id="sample_editable_1_new" class="btn green">
+											Agregar Bufete <i class="fa fa-plus"></i>
+											</button></a>
+										</div>
+      </div>
+    </div>
+<div id="sample_1_wrapper" class="dataTable_wrapper table-responsive">
+    <table class="table table-striped table-bordered table-hover dataTable no-footer">
         <thead>
-            <tr>
-                <th>Idbufete</th>
-                <th>Nombrebufete</th>
-                <th>Telefono1bufete</th>
+            <tr role="row" class="">
+                <th>Id bufete</th>
+                <th>Nombre </th>
+                <th>Telefono1 </th>
                 <th>Telefono2</th>
-                <th>Emailbufete</th>
-                <th>Direccionbufete</th>
-                <th>Estadobufete</th>
-                <th>Actions</th>
+                <th>Correo Electrónico</th>
+                <th>Direccion </th>
+                <th>Estado </th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -25,25 +39,17 @@
                 <td>{{ bufete.telefono2 }}</td>
                 <td>{{ bufete.emailBufete }}</td>
                 <td>{{ bufete.direccionBufete }}</td>
-                <td>{% if bufete.estadoBufete %}Yes{% else %}No{% endif %}</td>
+                <td>{{ bufete.estadoBufete }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('bufetes_show', { 'idBufete': bufete.idBufete }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('bufetes_edit', { 'idBufete': bufete.idBufete }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <a href="{{ path('bufetes_show', { 'idBufete': bufete.idBufete }) }}" class="btn blue">Ver</a>
+                    <a href="{{ path('bufetes_edit', { 'idBufete': bufete.idBufete }) }}" class="btn btn-warning">Editar</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+</div>
 
-    <ul>
-        <li>
-            <a href="{{ path('bufetes_new') }}">Create a new bufete</a>
-        </li>
-    </ul>
+  </div>
+</div>
 {% endblock %}
