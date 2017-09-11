@@ -217,6 +217,12 @@ class Demandantes
         return $this->dirtrabajoDemandante;
     }
 
+
+    public function __toString()
+ {
+   return $this->nombreDemandante;
+ }
+
     /**
      * Set telefonoDemandante
      *
@@ -313,4 +319,3 @@ class Demandantes
         return $this->idCiudad;
     }
 }
-

@@ -144,6 +144,12 @@ class Bufetes
         return $this;
     }
 
+    public function __toString()
+ {
+   return $this->nombreBufete;
+ }
+
+
     /**
      * Get emailBufete
      *
@@ -226,4 +232,3 @@ class Bufetes
         return $this->idCiudad;
     }
 }
-

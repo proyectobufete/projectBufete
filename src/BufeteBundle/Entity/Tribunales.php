@@ -57,6 +57,13 @@ class Tribunales
         return $this->tribunal;
     }
 
+
+    public function __toString()
+  {
+    return $this->tribunal;
+  }
+
+
     /**
      * Set estadoTribunal
      *
@@ -81,4 +88,3 @@ class Tribunales
         return $this->estadoTribunal;
     }
 }
-

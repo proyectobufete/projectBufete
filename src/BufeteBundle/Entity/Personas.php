@@ -68,6 +68,13 @@ class Personas
         return $this->idPersona;
     }
 
+
+
+      public function __toString()
+       {
+         return $this->nombrePersona;
+       }
+       
     /**
      * Set nombrePersona
      *
@@ -284,4 +291,3 @@ class Personas
         return $this->idBufete;
     }
 }
-
