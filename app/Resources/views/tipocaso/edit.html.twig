@@ -14,11 +14,14 @@
                 {{form_label(edit_form.tipo,'Nombre')}}
                 {{ form_widget(edit_form.tipo,{'attr':{'class' : 'form-control'}}) }}
               </div>
-            </div>
+            </div>  
             <div class="form-group ">
-              <div class="col-md-5">
-                {{form_label(edit_form.estadoTipo,'Estado')}}
-                {{ form_widget(edit_form.estadoTipo,{'attr':{'class' : 'form-control'}}) }}
+              <div class="col-md-4">
+                <label class="cr-styled">
+                    {{ form_widget(edit_form.estadoTipo)}}
+                    <i class="fa"></i>
+                    {{form_label(edit_form.estadoTipo,'Estado')}}
+                </label>
               </div>
             </div>
         </div>

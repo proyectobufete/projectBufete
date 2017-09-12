@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
       {% block title %}
-        <h1>Crear Ciudad</h1>
+        <h1>Crear Tipo de Caso</h1>
       {% endblock %}
 
 {% block body %}
@@ -17,8 +17,11 @@
           </div>
           <div class="form-group ">
             <div class="col-md-5">
-              {{form_label(form.estadoTipo,'Estado')}}
-              {{ form_widget(form.estadoTipo,{'attr':{'class' : 'form-control'}}) }}
+              <label class="cr-styled">
+                  {{ form_widget(form.estadoTipo)}}
+                  <i class="fa"></i>
+                  {{form_label(form.estadoTipo,'Estado')}}
+              </label>
             </div>
           </div>
         </div>

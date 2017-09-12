@@ -15,9 +15,9 @@
 											</button></a>
 										</div>
       </div>
-    </div>
-<div id="sample_1_wrapper" class="dataTable_wrapper table-responsive">
-    <table class="table table-striped table-bordered table-hover dataTable no-footer">
+
+<div class="col-md-12 col-sm-12 col-xs-6" >
+    <table class="table table-bordered ">
         <thead>
             <tr role="row" class="">
                 <th>Id bufete</th>
@@ -41,8 +41,8 @@
                 <td>{{ bufete.direccionBufete }}</td>
                 <td>{{ bufete.estadoBufete }}</td>
                 <td>
-                    <a href="{{ path('bufetes_show', { 'idBufete': bufete.idBufete }) }}" class="btn blue">Ver</a>
-                    <a href="{{ path('bufetes_edit', { 'idBufete': bufete.idBufete }) }}" class="btn btn-warning">Editar</a>
+                    <a href="{{ path('bufetes_show', { 'idBufete': bufete.idBufete }) }}" class="btn yellow">Ver</a>
+                    <a href="{{ path('bufetes_edit', { 'idBufete': bufete.idBufete }) }}" class="btn blue">Editar</a>
                 </td>
             </tr>
         {% endfor %}
@@ -50,6 +50,7 @@
     </table>
 </div>
 
+  </div>
   </div>
 </div>
 {% endblock %}

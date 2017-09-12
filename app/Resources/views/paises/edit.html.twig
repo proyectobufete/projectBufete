@@ -23,9 +23,12 @@ active
               </div>
             </div>
             <div class="form-group ">
-              <div class="col-md-5">
-                {{form_label(edit_form.estadoPais,'Estado')}}
-                {{ form_widget(edit_form.estadoPais,{'attr':{'class' : 'form-control'}}) }}
+              <div class="col-md-4">
+                <label class="cr-styled">
+                    {{ form_widget(edit_form.estadoPais)}}
+                    <i class="fa"></i>
+                    {{form_label(edit_form.estadoPais,'Estado')}}
+                </label>
               </div>
             </div>
         </div>

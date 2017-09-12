@@ -24,8 +24,11 @@ active
           </div>
           <div class="form-group ">
             <div class="col-md-5">
-              {{form_label(form.estadoPais,'Estado')}}
-              {{ form_widget(form.estadoPais,{'attr':{'class' : 'form-control'}}) }}
+              <label class="cr-styled">
+                  {{ form_widget(form.estadoPais)}}
+                  <i class="fa"></i>
+                  {{form_label(form.estadoPais,'Estado')}}
+              </label>
             </div>
           </div>
         </div>

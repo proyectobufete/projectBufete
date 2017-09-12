@@ -17,8 +17,11 @@
           </div>
           <div class="form-group ">
             <div class="col-md-5">
-              {{form_label(form.estadoEstadocivil,'Estado')}}
-              {{ form_widget(form.estadoEstadocivil,{'attr':{'class' : 'form-control'}}) }}
+              <label class="cr-styled">
+                  {{ form_widget(form.estadoEstadocivil)}}
+                  <i class="fa"></i>
+                  {{form_label(form.estadoEstadocivil,'Estado')}}
+              </label>
             </div>
           </div>
         </div>

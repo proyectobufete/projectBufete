@@ -6,8 +6,6 @@ active open
 {% block ac3 %}
 active
 {% endblock %}
-
-
       {% block title %}
         <h1>Editar Bufete</h1>
       {% endblock %}
@@ -38,8 +36,11 @@ active
           </div>
           <div class="form-group ">
             <div class="col-md-4">
-              {{form_label(edit_form.estadoCiudad,'Estado')}}
-              {{ form_widget(edit_form.estadoCiudad,{'attr':{'class' : 'checker'}}) }}
+              <label class="cr-styled">
+                  {{ form_widget(edit_form.estadoCiudad)}}
+                  <i class="fa"></i>
+                  {{form_label(edit_form.estadoCiudad,'Estado')}}
+              </label>
             </div>
           </div>
         </div>
