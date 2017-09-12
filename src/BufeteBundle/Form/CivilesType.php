@@ -13,9 +13,12 @@ class CivilesType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('pretencion')->add('idCaso');
+        $builder
+        ->add('pretencion')
+        //->add('idCaso')
+        ;
     }
-    
+
     /**
      * {@inheritdoc}
      */

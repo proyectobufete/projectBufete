@@ -3,6 +3,8 @@
 namespace BufeteBundle\Controller;
 
 use BufeteBundle\Entity\Casos;
+use BufeteBundle\Entity\Laborales;
+use BufeteBundle\Entity\Civiles;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -31,21 +33,68 @@ class CasosController extends Controller
      * Creates a new caso entity.
      *
      */
-    public function newAction(Request $request)
+    public function newLaboralAction(Request $request)
     {
         $caso = new Casos();
-        $form = $this->createForm('BufeteBundle\Form\CasosType', $caso);
+        $laboral = new Laborales();
+        $caso->setLaborales($laboral);
+
+        $idciudad = 1;
+        $idasignatario = 1;
+
+        $form = $this->createForm('BufeteBundle\Form\CasosType', $caso, array('idciudad'=> $idciudad));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $tipocaso_repo = $em->getRepository("BufeteBundle:Tipocaso");
+            $tipo = $tipocaso_repo->find(2);
+            $caso->setIdTipo($tipo);
+            $caso->setAsignatarioCaso($idasignatario);
+
             $em->persist($caso);
             $em->flush();
 
             return $this->redirectToRoute('casos_show', array('idCaso' => $caso->getIdcaso()));
         }
 
-        return $this->render('casos/new.html.twig', array(
+        return $this->render('casos/newlaboral.html.twig', array(
+            'caso' => $caso,
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+    * Crear casos civiles
+    */
+    public function newCivilAction(Request $request)
+    {
+        $caso = new Casos();
+        $civil = new Civiles();
+        $caso->setCiviles($civil);
+
+        $idciudad = 1;
+        $idasignatario = 1;
+
+        $form = $this->createForm('BufeteBundle\Form\CasocivilType', $caso, array('idciudad'=> $idciudad));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $tipocaso_repo = $em->getRepository("BufeteBundle:Tipocaso");
+            $tipo = $tipocaso_repo->find(1);
+            $caso->setIdTipo($tipo);
+            $caso->setAsignatarioCaso($idasignatario);
+
+            $em->persist($caso);
+            $em->flush();
+
+            return $this->redirectToRoute('casos_show', array('idCaso' => $caso->getIdcaso()));
+        }
+
+        return $this->render('casos/newcivil.html.twig', array(
             'caso' => $caso,
             'form' => $form->createView(),
         ));
