@@ -139,8 +139,10 @@ class Estudiantes
         return $this->idPersona;
     }
 
+
     public function __toString()
     {
         return $this->carneEstudiante;
     }
+
 }

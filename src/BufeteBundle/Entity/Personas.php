@@ -1,12 +1,21 @@
 <?php
 
 namespace BufeteBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+
+
 
 /**
  * Personas
  */
 class Personas
 {
+    /**
+     * @ORM\OneToOne(targetEntity="Estudiantes", mappedBy="personas")
+     *
+     */
+     protected $estudiantes;
+     
     /**
      * @var integer
      */
@@ -74,7 +83,7 @@ class Personas
        {
          return $this->nombrePersona;
        }
-       
+
     /**
      * Set nombrePersona
      *
@@ -290,4 +299,28 @@ class Personas
     {
         return $this->idBufete;
     }
+
+    /**
+     * Set Estudiantes
+     *
+     * @param \BufeteBundle\Entity\Estudiantes $estudiantes
+     * @return Personas
+     */
+    public function setEstudiantes(\BufeteBundle\Entity\Estudiantes $estudiantes = null)
+    {
+      $this->estudiantes = $estudiantes;
+      $estudiantes->setIdPersona($this);
+      return $this;
+    }
+
+    /**
+     * Get estudiantes
+     *
+     * @return \BufeteBundle\Entity\Estudiantes
+     */
+     public function getEstudiantes()
+     {
+       return $this->estudiantes;
+     }
+
 }
