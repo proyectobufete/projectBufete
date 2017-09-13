@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+      <form action="registro">
+        <label>BUSCAR ESTUDIANTE </label><br>
+        <label>Carné: </label>
+        <input type="text" id="carne" name="carne" value="{{carne}}"/>
+        <input type="submit" value="buscar"/>
+      </form>
+
+<br>
+<br>
+
+<!--
+      <label>Nombre Completo</label>
+          <input type="text" id="nombre" name="nombre" value="{{nombre}}"/><br>
+      <label>Carrera</label>
+          <input type="text" id="carrera" name="carrera" value="{{carrera}}"/><br>
+      <label>Telefono</label>
+          <input type="text" id="telefono" name="catelefonorne" value="{{telefono}}"/><br>
+      <label>Correo</label>
+          <input type="text" id="correo" name="carne" value="{{correo}}"/><br>
+      <label>Direccion</label>
+          <input type="text" id="direccion" name="carne" value="{{direccion}}"/><br>
+
+            <input type="submit" value="agregar"/>
+            <input type="submit" value="cancelar"/>
+-->
+
+
+
+
+  {{ form_start(form) }}
+  <label>DATOS PERSONALES </label><br>
+    {{ form_widget(form) }}
+
+        <input type="submit" value="Create" />
+  {{ form_end(form) }}
+
+
+
+<ul>
+    <li>
+        <a href="{{ path('personas_index') }}">Back to the list</a>
+    </li>
+</ul>
+
+
+
+{% endblock %}

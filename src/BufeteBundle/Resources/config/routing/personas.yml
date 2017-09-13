@@ -22,3 +22,10 @@ personas_delete:
     path:     /{idPersona}/delete
     defaults: { _controller: "BufeteBundle:Personas:delete" }
     methods:  DELETE
+
+
+personas_registro:
+    path: /registro
+    defaults: {_controller: "BufeteBundle:Personas:registro"}
+    methods: [GET, POST]
+
