@@ -6,8 +6,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 
 class PersonasType extends AbstractType
 {
@@ -16,6 +18,7 @@ class PersonasType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
       $this->carneEnvio = $options['carneEnvio'];
       $this->nomEnvio = $options['nombreEnvio'];
       $this->telEnvio = $options['telefonoEnvio'];
@@ -61,18 +64,21 @@ class PersonasType extends AbstractType
     }
 
 
+
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
+
             'data_class' => 'BufeteBundle\Entity\Personas',
             'carneEnvio'=> null,
             'nombreEnvio'=> null,
             'telefonoEnvio'=> null,
             'direccionEnvio'=> null,
             'correoEnvio'=> null,
+
         ));
     }
 

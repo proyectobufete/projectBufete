@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Caso creation</h1>
+    <h1>Caso Laboral</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -10,7 +10,11 @@
 
     <ul>
         <li>
-            <a href="{{ path('casos_index') }}">Back to the list</a>
+            <a href="{{ path('casos_indexlaborales') }}">Back to the list</a>
         </li>
     </ul>
+
+    {% if mensaje != null %}
+        <h4> {{ mensaje }} </h4>
+    {% endif %}
 {% endblock %}

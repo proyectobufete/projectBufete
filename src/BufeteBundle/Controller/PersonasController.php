@@ -6,6 +6,7 @@ use BufeteBundle\Entity\Personas;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+
 use BufeteBundle\Entity\Estudiantes;
 use BufeteBundle\Form\PersonasType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -13,12 +14,14 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
 use BufeteBundle\Entity\Post;
 
+
 /**
  * Persona controller.
  *
  */
 class PersonasController extends Controller
 {
+
 
   public function registroAction(Request $request)
   {
@@ -127,7 +130,6 @@ class PersonasController extends Controller
               ));
     }
 
-
     /**
      * Lists all persona entities.
      *
@@ -150,7 +152,9 @@ class PersonasController extends Controller
     public function newAction(Request $request)
     {
         $persona = new Personas();
+
         $form = $this->createForm('BufeteBundle\Form\PersonasnuevasType', $persona);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
