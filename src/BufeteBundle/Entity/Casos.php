@@ -7,6 +7,11 @@ namespace BufeteBundle\Entity;
  */
 class Casos
 {
+
+    protected $laborales;
+
+    protected $civiles;
+
     /**
      * @var integer
      */
@@ -492,5 +497,52 @@ return $this->asunto;
     public function getIdTipo()
     {
         return $this->idTipo;
+    }
+
+    /**
+    * Set Laborales
+    *
+    * @param \AppBundle\Entity\Laborales $laborales
+    * @return Casos
+    */
+    public function setLaborales(\BufeteBundle\Entity\Laborales $laborales = null)
+    {
+      $this->laborales = $laborales;
+      $laborales->setIdCaso($this);
+      return $this;
+    }
+
+    /**
+    * Get laborales
+    *
+    * @return \AppBundle\Entity\Laborales
+    */
+    public function getLaborales()
+    {
+      return $this->laborales;
+    }
+
+
+    /**
+    * Set Civiles
+    *
+    * @param \AppBundle\Entity\Civiles $civiles
+    * @return Casos
+    */
+    public function setCiviles(\BufeteBundle\Entity\Civiles $civiles = null)
+    {
+      $this->civiles = $civiles;
+      $civiles->setIdCaso($this);
+      return $this;
+    }
+
+    /**
+    * Get civiles
+    *
+    * @return \AppBundle\Entity\Civiles
+    */
+    public function getCiviles()
+    {
+      return $this->civiles;
     }
 }

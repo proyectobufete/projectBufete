@@ -1,0 +1,138 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Caso</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Idcaso</th>
+                <td>{{ caso.idCaso }}</td>
+            </tr>
+            <tr>
+                <th>Nocaso</th>
+                <td>{{ caso.noCaso }}</td>
+            </tr>
+            <tr>
+                <th>Lugar y Fecha</th>
+                <td>{{ caso.idDemandante.idCiudad.ciudad }}, {{ caso.idDemandante.idCiudad.idDepartamento.departamento}}, {% if caso.fechaCaso %}{{ caso.fechaCaso|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Asunto</th>
+                <td>{{ caso.asunto }}</td>
+            </tr>
+            <tr>
+                <th>Nombre Demandante</th>
+                <td>{{ caso.idDemandante.nombreDemandante }}</td>
+            </tr>
+
+            <tr>
+                <th>Edad Demandante</th>
+                <td>{{ caso.idDemandante.edadDemandante }}</td>
+            </tr>
+            <tr>
+                <th>DPI Demandante</th>
+                <td>{{ caso.idDemandante.dpiDemandante }}</td>
+            </tr>
+            <tr>
+                <th>Cedula Demandante</th>
+                <td>{{ caso.idDemandante.cedulaDemandante }}</td>
+            </tr>
+            <tr>
+                <th>Direccion Demandante</th>
+                <td>{{ caso.idDemandante.direccionDemandante }}</td>
+            </tr>
+            <tr>
+                <th>Direccion de trabajo Demandante</th>
+                <td>{{ caso.idDemandante.dirtrabajoDemandante }}</td>
+            </tr>
+            <tr>
+                <th>Telefono Demandante</th>
+                <td>{{ caso.idDemandante.telefonoDemandante }}</td>
+            </tr>
+            <tr>
+                <th>Estado Civil Demandante</th>
+                <td>{{ caso.idDemandante.idEstadocivil.estadocivil }}</td>
+            </tr>
+            <tr>
+                <th>Trabajo Demandante</th>
+                <td>{{ caso.idDemandante.idTrabajo.trabajo }}</td>
+            </tr>
+            <tr>
+                <th>Ciudad Demandante</th>
+                <td>{{ caso.idDemandante.idCiudad.ciudad }}</td>
+            </tr>
+            <tr>
+                <th>Pretencion</th>
+                <td>{{ caso.civiles.pretencion }}</td>
+            </tr>
+            <tr>
+                <th>Pruebas caso</th>
+                <td>{{ caso.pruebasCaso }}</td>
+            </tr>
+            <tr>
+                <th>Asignatario caso</th>
+                <td>{{ caso.asignatarioCaso }}</td>
+            </tr>
+            <tr>
+                <th>Estado caso</th>
+                <td>{{ caso.estadoCaso }}</td>
+            </tr>
+            <tr>
+                <th>Nombre demandado</th>
+                <td>{{ caso.nombreDemandado }}</td>
+            </tr>
+            <tr>
+                <th>Direccion demandado</th>
+                <td>{{ caso.dirDemandado }}</td>
+            </tr>
+            <tr>
+                <th>Dir notificacion demandado</th>
+                <td>{{ caso.dirnotificacionDemandado }}</td>
+            </tr>
+            <tr>
+                <th>Telefono demandado</th>
+                <td>{{ caso.telefonoDemandado }}</td>
+            </tr>
+            <tr>
+                <th>Otro demandado</th>
+                <td>{{ caso.otroDemandado }}</td>
+            </tr>
+            <tr>
+                <th>Nombre Estudiante</th>
+                <td>{{ caso.idEstudiante.idPersona.nombrePersona }}</td>
+            </tr>
+
+            <tr>
+                <th>Telefono Estudiante</th>
+                <td>{{ caso.idEstudiante.idPersona.telefonoPersona }}</td>
+            </tr>
+            <tr>
+                <th>Direccion Estudiante</th>
+                <td>{{ caso.idEstudiante.idPersona.direccionPersona }}</td>
+            </tr>
+            <tr>
+                <th>Carnet Estudiante</th>
+                <td>{{ caso.idEstudiante.carneEstudiante }}</td>
+            </tr>
+            <tr>
+                <th>Nombre Asesor</th>
+                <td>{{ caso.idPersona.nombrePersona }}</td>
+            </tr>
+            <tr>
+                <th>Telefono Asesor</th>
+                <td>{{ caso.idPersona.telefonoPersona }}</td>
+            </tr>
+            <tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('casos_indexciviles') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('casos_editcivil', { 'idCaso': caso.idCaso }) }}">Edit</a>
+        </li>
+    </ul>
+{% endblock %}
