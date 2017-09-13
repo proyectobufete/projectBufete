@@ -1,4 +1,6 @@
 {% extends 'layout.html.twig' %}
+{% block act2 %} active {% endblock %}
+{% block ac6 %} active {% endblock %}
       {% block title %}
         <h1>Editar Tipo de Caso</h1>
       {% endblock %}
@@ -14,7 +16,7 @@
                 {{form_label(edit_form.tipo,'Nombre')}}
                 {{ form_widget(edit_form.tipo,{'attr':{'class' : 'form-control'}}) }}
               </div>
-            </div>  
+            </div>
             <div class="form-group ">
               <div class="col-md-4">
                 <label class="cr-styled">
