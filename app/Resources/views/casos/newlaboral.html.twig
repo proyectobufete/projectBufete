@@ -10,7 +10,11 @@
 
     <ul>
         <li>
-            <a href="{{ path('casos_index') }}">Back to the list</a>
+            <a href="{{ path('casos_indexlaborales') }}">Back to the list</a>
         </li>
     </ul>
+
+    {% if mensaje != null %}
+        <h4> {{ mensaje }} </h4>
+    {% endif %}
 {% endblock %}
