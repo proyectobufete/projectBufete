@@ -1,3 +1,11 @@
+bufete_personas:
+        resource: "@BufeteBundle/Resources/config/routing/personas.yml"
+        prefix:   /personas
+
+bufete_estudiantes:
+        resource: "@BufeteBundle/Resources/config/routing/estudiantes.yml"
+        prefix:   /estudiantes        
+
 bufete_paises:
     resource: "@BufeteBundle/Resources/config/routing/paises.yml"
     prefix:   /paises
@@ -61,3 +69,11 @@ bufete_exoneraciones:
 bufete_casos:
         resource: "@BufeteBundle/Resources/config/routing/casos.yml"
         prefix:   /casos
+
+bufete_personas:
+        resource: "@BufeteBundle/Resources/config/routing/personas.yml"
+        prefix:   /personas
+
+bufete_estudiantes:
+        resource: "@BufeteBundle/Resources/config/routing/estudiantes.yml"
+        prefix:   /estudiantes

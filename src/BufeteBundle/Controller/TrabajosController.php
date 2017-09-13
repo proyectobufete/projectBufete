@@ -78,7 +78,7 @@ class TrabajosController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('trabajos_edit', array('idTrabajo' => $trabajo->getIdtrabajo()));
+            return $this->redirectToRoute('trabajos_index', array('idTrabajo' => $trabajo->getIdtrabajo()));
         }
 
         return $this->render('trabajos/edit.html.twig', array(
