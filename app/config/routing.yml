@@ -65,3 +65,11 @@ Exoneraciones:
 Casos:
     resource: "@BufeteBundle/Resources/config/routing/casos.yml"
     prefix:     /casos
+
+Personas:
+    resource: "@BufeteBundle/Resources/config/routing/personas.yml"
+    prefix:     /personas
+
+Estudiantes:
+    resource: "@BufeteBundle/Resources/config/routing/estudiantes.yml"
+    prefix:     /estudiantes
