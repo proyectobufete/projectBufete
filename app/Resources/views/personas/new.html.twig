@@ -8,6 +8,12 @@
         <input type="submit" value="Create" />
     {{ form_end(form) }}
 
+      {% for message in app.session.flashbag().get('status') %}
+          <div class="alert alert-success">
+              {{message}}
+          </div>
+      {% endfor %}
+
     <ul>
         <li>
             <a href="{{ path('personas_index') }}">Back to the list</a>

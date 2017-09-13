@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class PersonasnuevasType extends AbstractType
 {
@@ -22,7 +23,9 @@ class PersonasnuevasType extends AbstractType
             ->add('direccionPersona')
             ->add('emailPersona')
             ->add('usuarioPersona')
-            ->add('passPersona')
+            ->add('passPersona', PasswordType::class, array(
+              "required" => "required"
+            ))
             ->add('estadoPersona',ChoiceType::class,array(
                 "label" => "Estado",
                     "choices"=> array(
@@ -37,7 +40,6 @@ class PersonasnuevasType extends AbstractType
                 "label" => "Roles",
                     "choices"=> array(
                         "Administrador" =>"ROLE_ADMIN",
-                        "Estudiante" =>"ROLE_ESTUDIANTE",
                         "Asesor" =>"ROLE_ASESOR",
                         "Secretario" =>"ROLE_SECRETARIO",
                         "Director" =>"ROLE_DIRECTO",

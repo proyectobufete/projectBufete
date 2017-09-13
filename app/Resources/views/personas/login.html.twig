@@ -1,0 +1,30 @@
+
+{% block body %}
+
+{% if is_granted('ROLE_USER') %}
+    <strong>
+      Estas logueado como usuario normal
+    </strong>
+{% endif %}
+
+{% if is_granted('ROLE_ESTUDIANTE') %}
+    <strong>
+      Estas logueado como usuario estudiante
+    </strong>
+{% endif %}
+    <div class="col-lg-4">
+        <h2>Identificate</h2>
+        <hr>
+        <form class="" action="{{path("login_check")}}" method="post">
+            <label for="">Nombre de usuario: </label>
+            <input type="text" id="username" name="_username" value="{{ last_username}}" class="form-control" />
+            <label for="">Contraseña: </label>
+            <input type="password" id="password" name="_password" class="form-control" />
+            <br>
+            <input type="submit" value="Entrar" class="btn btn-success" />
+            <input type="hidden" name="_target_path" value="/bufetes/" />
+        </form>
+    </div>
+
+    <div class="clearfix"></div>
+{% endblock %}

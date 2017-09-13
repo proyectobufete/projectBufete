@@ -2,20 +2,19 @@
 
 namespace BufeteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
-
-
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Personas
  */
-class Personas
+class Personas implements UserInterface
 {
     /**
      * @ORM\OneToOne(targetEntity="Estudiantes", mappedBy="personas")
      *
      */
      protected $estudiantes;
-     
+
     /**
      * @var integer
      */
@@ -66,6 +65,26 @@ class Personas
      */
     private $idBufete;
 
+    //AUTH
+    public function getUsername()
+    {
+        return $this->usuarioPersona;
+    }
+
+    public function getSalt()
+    {
+       return null;
+    }
+
+    public function getRoles()
+    {
+        return array($this->getRole());
+    }
+
+    public function eraseCredentials(){
+
+    }
+    //END AUTH
 
     /**
      * Get idPersona
@@ -76,7 +95,6 @@ class Personas
     {
         return $this->idPersona;
     }
-
 
 
       public function __toString()
@@ -224,6 +242,16 @@ class Personas
      * @return string
      */
     public function getPassPersona()
+    {
+        return $this->passPersona;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string
+     */
+    public function getPassword()
     {
         return $this->passPersona;
     }
