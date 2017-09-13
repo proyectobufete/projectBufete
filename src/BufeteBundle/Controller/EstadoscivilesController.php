@@ -78,7 +78,7 @@ class EstadoscivilesController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('estadosciviles_edit', array('idEstadocivil' => $estadoscivile->getIdestadocivil()));
+            return $this->redirectToRoute('estadosciviles_index', array('idEstadocivil' => $estadoscivile->getIdestadocivil()));
         }
 
         return $this->render('estadosciviles/edit.html.twig', array(
