@@ -13,9 +13,25 @@ class LaboralesType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('fechaInicio')->add('fechaFin')->add('salario')->add('vaciones')->add('indemnizacion')->add('diaseptimos')->add('bonoanual')->add('horasextra')->add('bonoincentivo')->add('diasasueto')->add('aguinaldo')->add('reajustesalarial')->add('salariosretenidos')->add('otros')->add('idCaso')->add('idTrabajo');
+        $builder
+        ->add('fechaInicio')
+        ->add('fechaFin')
+        ->add('salario')
+        ->add('vaciones')
+        ->add('indemnizacion')
+        ->add('diaseptimos')
+        ->add('bonoanual')
+        ->add('horasextra')
+        ->add('bonoincentivo')
+        ->add('diasasueto')
+        ->add('aguinaldo')
+        ->add('reajustesalarial')
+        ->add('salariosretenidos')
+        ->add('otros')
+        //->add('idCaso')
+        ->add('idTrabajo');
     }
-    
+
     /**
      * {@inheritdoc}
      */
