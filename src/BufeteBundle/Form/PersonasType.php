@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class PersonasType extends AbstractType
 {
@@ -35,7 +35,9 @@ class PersonasType extends AbstractType
         ->add('direccionPersona',TextType::Class, array ("data"=>$this->dirEnvio))
         ->add('emailPersona',TextType::Class, array ("data"=>$this->corEnvio))
         ->add('usuarioPersona',TextType::Class, array ("label"=>"Usuario"))
+
         ->add('passPersona',TextType::Class, array ("data"=>"$this->passEnvio"))
+
         ->add('estadoPersona')
         ->add('estadoPersona',ChoiceType::class,array(
                 "label" => "Estado",

@@ -6,7 +6,7 @@ use BufeteBundle\Entity\Personas;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-
+use Symfony\Component\HttpFoundation\Session\Session;
 use BufeteBundle\Entity\Estudiantes;
 use BufeteBundle\Form\PersonasType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,6 +21,8 @@ use BufeteBundle\Entity\Post;
  */
 class PersonasController extends Controller
 {
+
+  private $session;
 
 
   public function indexAsesoresAction()
@@ -75,10 +77,25 @@ class PersonasController extends Controller
       ));
   }
 
+
+  public function __construct(){
+    $this->session = new Session();
+  }
+
+
+  public function loginAction(Request $request){
+      $authenticationUtils = $this->get("security.authentication_utils");
+      $error = $authenticationUtils->getLastAuthenticationError();
+      $lastUsername = $authenticationUtils->getLastUsername();
+      return $this->render("personas/login.html.twig", array(
+          "error"=> $error,
+          "last_username" => $lastUsername,
+          //"form" => $form->createView()
+      ));
+  }
+
   public function registroAction(Request $request)
   {
-
-
     $nomComp ="";
     $carrera ="";
     $telefono="";
@@ -120,8 +137,6 @@ class PersonasController extends Controller
             $datos = new \SimpleXMLElement($res03);
             $datos1 = new \SimpleXMLElement($res02);
 
-            //echo $datos->MSG;
-
             if(isset($datos->STATUS,$datos->DATOS[0]->CARNET,$datos->DATOS[0]->NOM1))
             {
                 $carne = $datos->DATOS[0]->CARNET;
@@ -134,16 +149,9 @@ class PersonasController extends Controller
             }
           }
 
-
-
           $persona = new Personas();
           $estudiantes = new Estudiantes();
           $persona->setEstudiantes($estudiantes);
-
-
-
-
-
 
 
               //Se define una cadena de caractares. Te recomiendo que uses esta.
@@ -178,25 +186,49 @@ class PersonasController extends Controller
                     'telefonoEnvio'=>$telefono,
                     'direccionEnvio'=>$direccion,
                     'correoEnvio'=>$correo,
+
                     'passEnvio' =>$pass,
+
 
                   ));
 
-
           $form->handleRequest($request);
 
-
+          $status=null;
           $unavariable="";
-          if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($persona);
-            $em->flush();
-              $unavariable = $persona->getIdPersona();
-              //echo "asdfasdfadsfadsafdsafdsafds     ".$unavariable;
-              return $this->redirectToRoute('personas_show', array('idPersona' => $persona->getIdPersona()));
+          if ($form->isSubmitted()){
+              if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $estudiante_repo = $em->getRepository("BufeteBundle:Estudiantes");
+                $est = $estudiante_repo->findOneBy(array('carneEstudiante' => $carne));
+                $persona_repo = $em->getRepository("BufeteBundle:Personas");
+                $pe = $persona_repo->findOneBy(array('usuarioPersona' => $form->get("usuarioPersona")->getData()));
+
+                if(count($est) == 0){
+                    if(count($pe) == 0){
+                        $factory = $this->get("security.encoder_factory");
+                        $encoder = $factory->getEncoder($persona);
+                        $password = $encoder->encodePassword($form->get("passPersona")->getData(), $persona->getSalt());
+                        $persona->setPassPersona($password);
+
+                        $em->persist($persona);
+                        $flush = $em->flush();
+                        if ($flush == null) {
+                            $status = "El usuario se ha creado correctamente";
+                        } else {
+                          $status = "El usuario no se pudo registrar";
+                        }
+                    }else {
+                        $status = "el nombre de usuario ya existe";
+                    }
+                }else {
+                  $status = "El carne ya esta registrado";
+                }
+
+                  //return $this->redirectToRoute('personas_show', array('idPersona' => $persona->getIdPersona()));
+              }
+          $this->session->getFlashBag()->add("status", $status);
           }
-
-
 
           return $this->render('personas/registro.html.twig', array(
               'persona' => $persona,
@@ -265,12 +297,34 @@ class PersonasController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($persona);
-            $em->flush();
+        if ($form->isSubmitted()){
+          if ($form->isValid()) {
+              $em = $this->getDoctrine()->getManager();
+              $persona_repo = $em->getRepository("BufeteBundle:Personas");
+              $pe = $persona_repo->findOneBy(array('usuarioPersona' => $form->get("usuarioPersona")->getData()));
+              if (count($pe)==0) {
+                $factory = $this->get("security.encoder_factory");
+                $encoder = $factory->getEncoder($persona);
+                $password = $encoder->encodePassword($form->get("passPersona")->getData(), $persona->getSalt());
+                $persona->setPassPersona($password);
 
-            return $this->redirectToRoute('personas_detalle', array('idPersona' => $persona->getIdpersona()));
+                //$em = $this->getDoctrine()->getManager();
+                $em->persist($persona);
+                $flush = $em->flush();
+                if ($flush == null) {
+                    $status = "El usuario se ha creado correctamente";
+                } else {
+                  $status = "El usuario no se pudo registrar";
+                }
+            } else {
+                  $status = "El usuario ya existe";
+            }
+              //return $this->redirectToRoute('personas_show', array('idPersona' => $persona->getIdpersona()));
+          } else {
+              $status = "El usuario no se pudo registrar";
+          }
+          $this->session->getFlashBag()->add("status", $status);
+
         }
 
         return $this->render('personas/new.html.twig', array(

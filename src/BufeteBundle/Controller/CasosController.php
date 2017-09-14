@@ -63,9 +63,9 @@ class CasosController extends Controller
         $caso = new Casos();
         $laboral = new Laborales();
         $caso->setLaborales($laboral);
-
-        $idciudad = 1;
-        $idasignatario = 1;
+        //$user = $this->getUser()->getIdPersona();
+        $idciudad = $this->getUser()->getIdBufete()->getIdCiudad()->getIdCiudad();
+        $idasignatario = $this->getUser()->getIdPersona();
 
         $id_estudiante = null; $cantidad = null; $laborales = null; $flush = null; $mensaje = null;
 
@@ -100,6 +100,7 @@ class CasosController extends Controller
             if ($laborales < 2) {
               $em->persist($caso);
               $flush = $em->flush();
+              $flush=true;
                 if($flush == true){
                     $mensaje = "Se registro correctamente el caso";
                 } else{
@@ -115,6 +116,7 @@ class CasosController extends Controller
             'caso' => $caso,
             'form' => $form->createView(),
             'mensaje' => $mensaje,
+          //  'usuario' => $user,
         ));
     }
 
@@ -126,9 +128,8 @@ class CasosController extends Controller
         $caso = new Casos();
         $civil = new Civiles();
         $caso->setCiviles($civil);
-
-        $idciudad = 1;
-        $idasignatario = 1;
+        $idciudad = $this->getUser()->getIdBufete()->getIdCiudad()->getIdCiudad();
+        $idasignatario = $this->getUser()->getIdPersona();
 
         $id_estudiante = null; $cantidad = null; $civiles = null; $flush = null; $mensaje = null;
 

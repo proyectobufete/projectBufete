@@ -4,11 +4,21 @@ bufete_personas:
 
 bufete_estudiantes:
         resource: "@BufeteBundle/Resources/config/routing/estudiantes.yml"
-        prefix:   /estudiantes        
+        prefix:   /estudiantes
 
 bufete_paises:
     resource: "@BufeteBundle/Resources/config/routing/paises.yml"
     prefix:   /paises
+
+login:
+    path: /login
+    defaults: {_controller: BufeteBundle:Personas:login}
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout
 
 bufete_homepage:
     path:     /
