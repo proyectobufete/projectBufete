@@ -24,6 +24,7 @@ class PersonasType extends AbstractType
       $this->telEnvio = $options['telefonoEnvio'];
       $this->dirEnvio = $options['direccionEnvio'];
       $this->corEnvio = $options['correoEnvio'];
+      $this->passEnvio = $options['passEnvio'];
 
       $builder
 
@@ -34,9 +35,9 @@ class PersonasType extends AbstractType
         ->add('direccionPersona',TextType::Class, array ("data"=>$this->dirEnvio))
         ->add('emailPersona',TextType::Class, array ("data"=>$this->corEnvio))
         ->add('usuarioPersona',TextType::Class, array ("label"=>"Usuario"))
-        ->add('passPersona', PasswordType::class, array(
-          "required" => "required"
-        ))
+
+        ->add('passPersona',TextType::Class, array ("data"=>"$this->passEnvio"))
+
         ->add('estadoPersona')
         ->add('estadoPersona',ChoiceType::class,array(
                 "label" => "Estado",
@@ -49,12 +50,13 @@ class PersonasType extends AbstractType
             ))
             //->add('role')
             ->add('role', ChoiceType::class,array(
-                "label" => "Roles",
+                "label" => "Tipo",
                     "choices"=> array(
                         "Estudiante" =>"ROLE_ESTUDIANTE",
               ),
                 'expanded'  => true,
                 //'multiple'  => true,
+
             ))
             ->add('idBufete')
             //form DATOS DE ESTUDIO
@@ -80,6 +82,7 @@ class PersonasType extends AbstractType
             'telefonoEnvio'=> null,
             'direccionEnvio'=> null,
             'correoEnvio'=> null,
+            'passEnvio' => null,
 
         ));
     }
