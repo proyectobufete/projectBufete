@@ -6,7 +6,7 @@ use BufeteBundle\Entity\Personas;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-
+use Symfony\Component\HttpFoundation\Session\Session;
 use BufeteBundle\Entity\Estudiantes;
 use BufeteBundle\Form\PersonasType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -22,11 +22,80 @@ use BufeteBundle\Entity\Post;
 class PersonasController extends Controller
 {
 
+  private $session;
+
+
+  public function indexAsesoresAction()
+  {
+
+      $em = $this->getDoctrine()->getManager();
+
+      $query = $em->CreateQuery(
+          "SELECT p FROM BufeteBundle:Personas p
+          WHERE p.role LIKE 'ROLE_ASESOR'"
+        );
+
+        $asesores = $query->getResult();
+
+        return $this->render('personas/indexAsesores.html.twig', array(
+          'asesores' => $asesores,
+        ));
+  }
+
+  public function indexEstudiantesAction()
+  {
+    $em = $this->getDoctrine()->getManager();
+
+/*
+    $query = $em->CreateQuery(
+        "SELECT p FROM BufeteBundle:Personas p
+        WHERE p.role LIKE 'ROLE_ESTUDIANTE'"
+      );
+*/
+    $query = $em->CreateQuery(
+       "SELECT p FROM BufeteBundle:Personas p
+        INNER JOIN BufeteBundle:Estudiantes e
+        WITH p=e.idPersona"
+      );
+
+      $estudiantes = $query->getResult();
+
+      return $this->render('personas/indexEstudiantes.html.twig', array(
+          'estudiantes' => $estudiantes,
+
+      ));
+  }
+
+
+  public function detalleAction(Personas $persona)
+  {
+      $deleteForm = $this->createDeleteForm($persona);
+
+      return $this->render('personas/detalle.html.twig', array(
+          'persona' => $persona,
+          'delete_form' => $deleteForm->createView(),
+      ));
+  }
+
+
+  public function __construct(){
+    $this->session = new Session();
+  }
+
+
+  public function loginAction(Request $request){
+      $authenticationUtils = $this->get("security.authentication_utils");
+      $error = $authenticationUtils->getLastAuthenticationError();
+      $lastUsername = $authenticationUtils->getLastUsername();
+      return $this->render("personas/login.html.twig", array(
+          "error"=> $error,
+          "last_username" => $lastUsername,
+          //"form" => $form->createView()
+      ));
+  }
 
   public function registroAction(Request $request)
   {
-
-
     $nomComp ="";
     $carrera ="";
     $telefono="";
@@ -68,8 +137,6 @@ class PersonasController extends Controller
             $datos = new \SimpleXMLElement($res03);
             $datos1 = new \SimpleXMLElement($res02);
 
-            //echo $datos->MSG;
-
             if(isset($datos->STATUS,$datos->DATOS[0]->CARNET,$datos->DATOS[0]->NOM1))
             {
                 $carne = $datos->DATOS[0]->CARNET;
@@ -82,15 +149,35 @@ class PersonasController extends Controller
             }
           }
 
-
-
           $persona = new Personas();
           $estudiantes = new Estudiantes();
           $persona->setEstudiantes($estudiantes);
 
 
-          //echo "llego aqui";
-          //die();
+              //Se define una cadena de caractares. Te recomiendo que uses esta.
+              $cadena = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+              //Obtenemos la longitud de la cadena de caracteres
+              $longitudCadena=strlen($cadena);
+
+              //Se define la variable que va a contener la contraseña
+              $pass = "";
+              //Se define la longitud de la contraseña, en mi caso 10, pero puedes poner la longitud que quieras
+              $longitudPass=8;
+
+              //Creamos la contraseña
+              for($i=1 ; $i<=$longitudPass ; $i++){
+                  //Definimos numero aleatorio entre 0 y la longitud de la cadena de caracteres-1
+                  $pos=rand(0,$longitudCadena-1);
+
+                  //Vamos formando la contraseña en cada iteraccion del bucle, añadiendo a la cadena $pass la letra correspondiente a la posicion $pos en la cadena de caracteres definida.
+                  $pass .= substr($cadena,$pos,1);
+              }
+
+
+              //echo $pass;
+              //die();
+
+
 
           $form = $this->createForm('BufeteBundle\Form\PersonasType', $persona,
                   array(
@@ -100,23 +187,48 @@ class PersonasController extends Controller
                     'direccionEnvio'=>$direccion,
                     'correoEnvio'=>$correo,
 
-                  ));
+                    'passEnvio' =>$pass,
 
+
+                  ));
 
           $form->handleRequest($request);
 
-
+          $status=null;
           $unavariable="";
-          if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($persona);
-            $em->flush();
-              $unavariable = $persona->getIdPersona();
-              //echo "asdfasdfadsfadsafdsafdsafds     ".$unavariable;
-              return $this->redirectToRoute('personas_show', array('idPersona' => $persona->getIdPersona()));
+          if ($form->isSubmitted()){
+              if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $estudiante_repo = $em->getRepository("BufeteBundle:Estudiantes");
+                $est = $estudiante_repo->findOneBy(array('carneEstudiante' => $carne));
+                $persona_repo = $em->getRepository("BufeteBundle:Personas");
+                $pe = $persona_repo->findOneBy(array('usuarioPersona' => $form->get("usuarioPersona")->getData()));
+
+                if(count($est) == 0){
+                    if(count($pe) == 0){
+                        $factory = $this->get("security.encoder_factory");
+                        $encoder = $factory->getEncoder($persona);
+                        $password = $encoder->encodePassword($form->get("passPersona")->getData(), $persona->getSalt());
+                        $persona->setPassPersona($password);
+
+                        $em->persist($persona);
+                        $flush = $em->flush();
+                        if ($flush == null) {
+                            $status = "El usuario se ha creado correctamente";
+                        } else {
+                          $status = "El usuario no se pudo registrar";
+                        }
+                    }else {
+                        $status = "el nombre de usuario ya existe";
+                    }
+                }else {
+                  $status = "El carne ya esta registrado";
+                }
+
+                  //return $this->redirectToRoute('personas_show', array('idPersona' => $persona->getIdPersona()));
+              }
+          $this->session->getFlashBag()->add("status", $status);
           }
-
-
 
           return $this->render('personas/registro.html.twig', array(
               'persona' => $persona,
@@ -130,12 +242,16 @@ class PersonasController extends Controller
               ));
     }
 
+
+
+
     /**
      * Lists all persona entities.
      *
      */
     public function indexAction()
     {
+
         $em = $this->getDoctrine()->getManager();
 
         $personas = $em->getRepository('BufeteBundle:Personas')->findAll();
@@ -145,29 +261,77 @@ class PersonasController extends Controller
         ));
     }
 
+
     /**
      * Creates a new persona entity.
      *
      */
     public function newAction(Request $request)
     {
+
+      //Se define una cadena de caractares. Te recomiendo que uses esta.
+      $cadena = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+      //Obtenemos la longitud de la cadena de caracteres
+      $longitudCadena=strlen($cadena);
+
+      //Se define la variable que va a contener la contraseña
+      $pass = "";
+      //Se define la longitud de la contraseña, en mi caso 10, pero puedes poner la longitud que quieras
+      $longitudPass=8;
+
+      //Creamos la contraseña
+      for($i=1 ; $i<=$longitudPass ; $i++){
+          //Definimos numero aleatorio entre 0 y la longitud de la cadena de caracteres-1
+          $pos=rand(0,$longitudCadena-1);
+
+          //Vamos formando la contraseña en cada iteraccion del bucle, añadiendo a la cadena $pass la letra correspondiente a la posicion $pos en la cadena de caracteres definida.
+          $pass .= substr($cadena,$pos,1);
+      }
+
+
         $persona = new Personas();
 
-        $form = $this->createForm('BufeteBundle\Form\PersonasnuevasType', $persona);
+        $form = $this->createForm('BufeteBundle\Form\PersonasnuevasType', $persona, array(
+            'passEnvio' =>$pass,
+        ));
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($persona);
-            $em->flush();
+        if ($form->isSubmitted()){
+          if ($form->isValid()) {
+              $em = $this->getDoctrine()->getManager();
+              $persona_repo = $em->getRepository("BufeteBundle:Personas");
+              $pe = $persona_repo->findOneBy(array('usuarioPersona' => $form->get("usuarioPersona")->getData()));
+              if (count($pe)==0) {
+                $factory = $this->get("security.encoder_factory");
+                $encoder = $factory->getEncoder($persona);
+                $password = $encoder->encodePassword($form->get("passPersona")->getData(), $persona->getSalt());
+                $persona->setPassPersona($password);
 
-            return $this->redirectToRoute('personas_show', array('idPersona' => $persona->getIdpersona()));
+                //$em = $this->getDoctrine()->getManager();
+                $em->persist($persona);
+                $flush = $em->flush();
+                if ($flush == null) {
+                    $status = "El usuario se ha creado correctamente";
+                } else {
+                  $status = "El usuario no se pudo registrar";
+                }
+            } else {
+                  $status = "El usuario ya existe";
+            }
+              //return $this->redirectToRoute('personas_show', array('idPersona' => $persona->getIdpersona()));
+          } else {
+              $status = "El usuario no se pudo registrar";
+          }
+          $this->session->getFlashBag()->add("status", $status);
+
         }
 
         return $this->render('personas/new.html.twig', array(
             'persona' => $persona,
+
             'form' => $form->createView(),
+
         ));
     }
 
@@ -175,11 +339,11 @@ class PersonasController extends Controller
      * Finds and displays a persona entity.
      *
      */
-    public function showAction(Personas $persona)
+    public function showPersonasAction(Personas $persona)
     {
         $deleteForm = $this->createDeleteForm($persona);
 
-        return $this->render('personas/show.html.twig', array(
+        return $this->render('personas/showPersonas.html.twig', array(
             'persona' => $persona,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -191,8 +355,32 @@ class PersonasController extends Controller
      */
     public function editAction(Request $request, Personas $persona)
     {
+
+        $nomComp = $persona->getnombrePersona();
+        $telefono = $persona->gettelefonoPersona();
+        $direccion = $persona->getdireccionPersona();
+        $correo = $persona->getemailPersona();
+
         $deleteForm = $this->createDeleteForm($persona);
-        $editForm = $this->createForm('BufeteBundle\Form\PersonasType', $persona);
+
+        if($persona->getrole() == "ROLE_ESTUDIANTE")
+        {
+          $carne = $persona->getestudiantes()->getcarneEstudiante();
+          $editForm = $this->createForm('BufeteBundle\Form\PersonasType', $persona, array(
+              'nombreEnvio' => $nomComp,
+              'carneEnvio'=> $carne,
+              'telefonoEnvio'=>$telefono,
+              'direccionEnvio'=>$direccion,
+              'correoEnvio'=>$correo,
+
+          ));
+        }
+        else if($persona->getrole() == "ROLE_ESTUDIANTE" || "ROLE_ASESOR" || "ROLE_SECRETARIO" ||"ROLE_DIRECTOR")
+        {
+          $carne = "null";
+          $editForm = $this->createForm('BufeteBundle\Form\PersonasnuevasType', $persona, array(
+          ));
+        }
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

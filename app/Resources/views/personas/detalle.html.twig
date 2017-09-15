@@ -1,46 +1,65 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Persona</h1>
+    <h1>Datos Personales</h1>
 
     <table>
         <tbody>
             <tr>
-                <th>Idpersona</th>
-                <td>{{ persona.idPersona }}</td>
+
             </tr>
             <tr>
-                <th>Nombrepersona</th>
+                <th>Nombre</th>
                 <td>{{ persona.nombrePersona }}</td>
             </tr>
             <tr>
-                <th>Telefonopersona</th>
+                <th>Teléfono</th>
                 <td>{{ persona.telefonoPersona }}</td>
             </tr>
             <tr>
-                <th>Direccionpersona</th>
+                <th>Direccion</th>
                 <td>{{ persona.direccionPersona }}</td>
             </tr>
             <tr>
-                <th>Emailpersona</th>
+                <th>Email</th>
                 <td>{{ persona.emailPersona }}</td>
             </tr>
             <tr>
-                <th>Usuariopersona</th>
+                <th>Usuario</th>
                 <td>{{ persona.usuarioPersona }}</td>
             </tr>
             <tr>
-                <th>Passpersona</th>
+                <th>Contraseña</th>
                 <td>{{ persona.passPersona }}</td>
             </tr>
             <tr>
-                <th>Estadopersona</th>
-                <td>{% if persona.estadoPersona %}Yes{% else %}No{% endif %}</td>
+                <th>Estado de Usuario</th>
+                <td>{% if persona.estadoPersona %}Habilitado{% else %}Deshabilitado{% endif %}</td>
             </tr>
             <tr>
-                <th>Role</th>
+                <th>Tipo de Usuario</th>
                 <td>{{ persona.role }}</td>
             </tr>
+
+                {% if(persona.estudiantes !=null) %}
+                  {% if(persona.role =="ROLE_ESTUDIANTE") %}
+
+                  <tr>
+                    <th>
+                      <h1>Datos de Estudio</h1>
+                    </th>
+                  </tr>
+
+                    <tr>
+                      <th>Carné</th> <td>{{persona.estudiantes.carneEstudiante}}</td>
+                    </tr>
+                    <tr>
+                      <th>Cierre de Pensum</th> <td>{{persona.estudiantes.cierrePensum}}</td>
+                    </tr>
+                  {% endif %}
+                {% endif %}
+
+
         </tbody>
     </table>
 

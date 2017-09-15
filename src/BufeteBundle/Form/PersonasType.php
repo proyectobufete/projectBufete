@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class PersonasType extends AbstractType
 {
@@ -24,6 +24,7 @@ class PersonasType extends AbstractType
       $this->telEnvio = $options['telefonoEnvio'];
       $this->dirEnvio = $options['direccionEnvio'];
       $this->corEnvio = $options['correoEnvio'];
+      $this->passEnvio = $options['passEnvio'];
 
       $builder
 
@@ -34,7 +35,9 @@ class PersonasType extends AbstractType
         ->add('direccionPersona',TextType::Class, array ("data"=>$this->dirEnvio))
         ->add('emailPersona',TextType::Class, array ("data"=>$this->corEnvio))
         ->add('usuarioPersona',TextType::Class, array ("label"=>"Usuario"))
-        ->add('passPersona')
+
+        ->add('passPersona',TextType::Class, array ("data"=>"$this->passEnvio"))
+
         ->add('estadoPersona')
         ->add('estadoPersona',ChoiceType::class,array(
                 "label" => "Estado",
@@ -47,18 +50,19 @@ class PersonasType extends AbstractType
             ))
             //->add('role')
             ->add('role', ChoiceType::class,array(
-                "label" => "Roles",
+                "label" => "Tipo",
                     "choices"=> array(
                         "Estudiante" =>"ROLE_ESTUDIANTE",
               ),
                 'expanded'  => true,
                 //'multiple'  => true,
+
             ))
             ->add('idBufete')
             //form DATOS DE ESTUDIO
             ->add('estudiantes', 'BufeteBundle\Form\EstudiantesType', array(
                 'label'=>'DATOS DE ESTUDIO',
-                //'carneEnvio' =>$this->carneEnvio,
+                'carneEnvio' =>$this->carneEnvio,
             ))
           ;
     }
@@ -78,6 +82,7 @@ class PersonasType extends AbstractType
             'telefonoEnvio'=> null,
             'direccionEnvio'=> null,
             'correoEnvio'=> null,
+            'passEnvio' => null,
 
         ));
     }

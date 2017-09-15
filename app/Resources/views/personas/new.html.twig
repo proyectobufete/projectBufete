@@ -1,12 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Persona creation</h1>
+    <h1>Agregar nuevo Personal</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
         <input type="submit" value="Create" />
     {{ form_end(form) }}
+
+      {% for message in app.session.flashbag().get('status') %}
+          <div class="alert alert-success">
+              {{message}}
+          </div>
+      {% endfor %}
 
     <ul>
         <li>

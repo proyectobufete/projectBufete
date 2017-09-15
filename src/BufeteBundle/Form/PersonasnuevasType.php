@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class PersonasnuevasType extends AbstractType
 {
@@ -16,13 +17,16 @@ class PersonasnuevasType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+      $this->passEnvio = $options['passEnvio'];
         $builder
             ->add('nombrePersona')
             ->add('telefonoPersona')
             ->add('direccionPersona')
             ->add('emailPersona')
-            ->add('usuarioPersona')
-            ->add('passPersona')
+
+            ->add('usuarioPersona',TextType::Class, array ("label"=>"Usuario"))
+            ->add('passPersona',TextType::Class, array ("data"=>"$this->passEnvio"))
+
             ->add('estadoPersona',ChoiceType::class,array(
                 "label" => "Estado",
                     "choices"=> array(
@@ -37,7 +41,7 @@ class PersonasnuevasType extends AbstractType
                 "label" => "Roles",
                     "choices"=> array(
                         "Administrador" =>"ROLE_ADMIN",
-                        "Estudiante" =>"ROLE_ESTUDIANTE",
+
                         "Asesor" =>"ROLE_ASESOR",
                         "Secretario" =>"ROLE_SECRETARIO",
                         "Director" =>"ROLE_DIRECTO",
@@ -57,6 +61,7 @@ class PersonasnuevasType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'BufeteBundle\Entity\Personas',
+            'passEnvio' => null,
         ));
     }
 
