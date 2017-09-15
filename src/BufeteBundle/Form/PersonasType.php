@@ -59,7 +59,7 @@ class PersonasType extends AbstractType
 
             ))
             ->add('idBufete')
-            //form DATOS DE ESTUDIO
+            
             ->add('estudiantes', 'BufeteBundle\Form\EstudiantesType', array(
                 'label'=>'DATOS DE ESTUDIO',
                 'carneEnvio' =>$this->carneEnvio,

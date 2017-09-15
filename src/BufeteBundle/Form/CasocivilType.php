@@ -22,7 +22,8 @@ class CasocivilType extends AbstractType
         $builder
         ->add('noCaso')
         ->add('fechaCaso', DateType::class, array(
-          "data" => new \DateTime("now")
+          "data" => new \DateTime("now"),
+          'widget' => 'single_text'
         ))
         ->add('asunto')
         ->add('pruebasCaso')
@@ -62,7 +63,6 @@ class CasocivilType extends AbstractType
             ->setParameter('ciudad', $this->idciudad);
             }
         ))
-        //->add('idTipo')
         ->add('civiles', 'BufeteBundle\Form\CivilesType', array(
             'label' => 'Civiles',
         ))
