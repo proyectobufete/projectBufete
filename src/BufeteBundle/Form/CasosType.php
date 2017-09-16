@@ -22,7 +22,8 @@ class CasosType extends AbstractType
         $builder
         ->add('noCaso')
         ->add('fechaCaso', DateType::class, array(
-          "data" => new \DateTime("now")
+          "data" => new \DateTime("now"),
+          'widget' => 'single_text'
         ))
         ->add('asunto')
         ->add('pruebasCaso')

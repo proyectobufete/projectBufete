@@ -224,7 +224,7 @@ class CasosController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('casos_editlaboral', array('idCaso' => $caso->getIdcaso()));
+            return $this->redirectToRoute('casos_showlaboral', array('idCaso' => $caso->getIdcaso()));
         }
 
         return $this->render('casos/editlaboral.html.twig', array(
@@ -248,7 +248,7 @@ class CasosController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('casos_editcivil', array('idCaso' => $caso->getIdcaso()));
+            return $this->redirectToRoute('casos_showcivil', array('idCaso' => $caso->getIdcaso()));
         }
 
         return $this->render('casos/editcivil.html.twig', array(

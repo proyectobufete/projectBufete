@@ -5,6 +5,7 @@ namespace BufeteBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class LaboralesType extends AbstractType
 {
@@ -14,8 +15,12 @@ class LaboralesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('fechaInicio')
-        ->add('fechaFin')
+        ->add('fechaInicio', DateType::class, array(
+          'widget' => 'single_text'
+        ))
+        ->add('fechaFin', DateType::class, array(
+          'widget' => 'single_text'
+        ))
         ->add('salario')
         ->add('vaciones')
         ->add('indemnizacion')
