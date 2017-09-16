@@ -48,6 +48,7 @@ class PersonasnuevasType extends AbstractType
               ),
                 'expanded'  => true,
                 'multiple'  => false,
+
             ))
             ->add('idBufete')
 
