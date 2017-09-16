@@ -72,10 +72,10 @@
                         </ul>
                     </li>
 
-                    <li class="has-submenu"><a href="#"><i class="ion-grid"></i> <span class="nav-label">Accion 3</span></a>
+                    <li class="has-submenu  {% block act3 %}{% endblock %}"><a href="#"><i class="ion-grid"></i> <span class="nav-label">Accion 3</span></a>
                         <ul class="list-unstyled">
-                            <li><a href="tables.html">Basic Tables</a></li>
-                            <li><a href="table-datatable.html">Data Table</a></li>
+                            <li class="{% block ac8 %}{% endblock %}"><a href="{{path("casos_indexciviles")}}">Casos Civiles</a></li>
+                            <li class="{% block ac9 %}{% endblock %}"><a href="{{path("casos_indexlaborales")}}">Casos Laborales</a></li>
                         </ul>
                     </li>
 
