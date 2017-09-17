@@ -22,7 +22,6 @@ use BufeteBundle\Entity\Post;
 class PersonasController extends Controller
 {
 
-
   public function indexAsesoresAction()
   {
       $em = $this->getDoctrine()->getManager();
@@ -31,8 +30,7 @@ class PersonasController extends Controller
           "SELECT p FROM BufeteBundle:Personas p
           WHERE p.role LIKE 'ROLE_ASESOR'"
         );
-
-        $asesores = $query->getResult();
+      $asesores = $query->getResult();
 
         return $this->render('personas/indexAsesores.html.twig', array(
           'asesores' => $asesores,
@@ -48,15 +46,12 @@ class PersonasController extends Controller
         INNER JOIN BufeteBundle:Estudiantes e
         WITH p=e.idPersona"
       );
-
       $estudiantes = $query->getResult();
 
       return $this->render('personas/indexEstudiantes.html.twig', array(
           'estudiantes' => $estudiantes,
-
       ));
   }
-
 
   public function detalleAction(Personas $persona)
   {
