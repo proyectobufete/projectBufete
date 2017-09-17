@@ -16,14 +16,23 @@ class EstadoscivilesController extends Controller
      * Lists all estadoscivile entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $estadosciviles = $em->getRepository('BufeteBundle:Estadosciviles')->findAll();
+        /**
+        * @var $paginator \Knp\Component\PagerPaginator
+        */
+        $paginator= $this->get('knp_paginator');
+        $resultado=$paginator->paginate(
+          $estadosciviles,
+          $request->query->getInt('page' ,1),
+          $request->query->getInt('limit' ,2)
 
+        );
         return $this->render('estadosciviles/index.html.twig', array(
-            'estadosciviles' => $estadosciviles,
+            'estadosciviles' => $resultado,
         ));
     }
 
