@@ -1,21 +1,103 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
+
+      {% block title %}
+        <h1>Editar Estudiante</h1>
+      {% endblock %}
 
 {% block body %}
-    <h1>Personassss edit</h1>
+    <div class="portlet-body form">
+      <div id="form_sample_1" class="form-horizontal" >
+        {{ form_start(edit_form,{'attr':{'role':'form'}}) }}
+        <div class="form-body">
+          <div class="col-md-offset-2">
+            <div class="row">
+              <div class="col-md-6 col-md-offset-2">
+                <label for=""><h4><b>Datos Personales</b></h4></label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                {{form_label(edit_form.nombrePersona,'Nombre Estudiante')}}
+                {{form_widget(edit_form.nombrePersona,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-2">
+                {{form_label(edit_form.telefonoPersona,'Número de Teléfono')}}
+                {{form_widget(edit_form.telefonoPersona,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                {{form_label(edit_form.direccionPersona,'Dirección')}}
+                {{form_widget(edit_form.direccionPersona,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-2">
+                {{form_label(edit_form.emailPersona,'Correo Electrónico')}}
+                {{form_widget(edit_form.emailPersona,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                {{form_label(edit_form.usuarioPersona,'Nombre de Usuario')}}
+                {{form_widget(edit_form.usuarioPersona,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+              <div class="col-md-2">
+                {{form_label(edit_form.passPersona,'Contraseña')}}
+                {{form_widget(edit_form.passPersona,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                {{form_label(edit_form.estadoPersona,'Estado')}}
+                {{form_widget(edit_form.estadoPersona) }}
+              </div>
+              <div class="col-md-2">
+                {{form_label(edit_form.role,'Tipo')}}
+                {{form_widget(edit_form.role) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                {{form_label(edit_form.idBufete,'Bufete')}}
+                {{form_widget(edit_form.idBufete,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            {% if(persona.estudiantes !=null) %}
+              {% if(persona.role =="ROLE_ESTUDIANTE") %}
+            <div class="row">
+              <div class="col-md-6 col-md-offset-2">
+                <label for=""><h4><b>Datos Academicos</b></h4></label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                {{form_label(edit_form.estudiantes.carneEstudiante,'No. Carné')}}
+                {{form_widget(edit_form.estudiantes.carneEstudiante,{'attr':{'class' : 'form-control'}}) }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <label class="cr-styled">
+                    {{ form_widget(edit_form.estudiantes.cierrePensum)}}
+                    <i class="fa"></i>
+                    {{form_label(edit_form.estudiantes.cierrePensum,'Cierre de Pensum')}}
+                </label>
+              </div>
+            </div>
+            {% endif %}
+          {% endif %}
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+        </div>
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-2 col-md-9">
+              <button type="submit" name="Create" class="btn green">Editar</button>
+              <a href="{{ path('personas_indexEstudiantes') }}"><button type="button" name="cancelar" class="btn default">Cancelar</button></a>
+            </div>
+          </div>
+        </div>
+        {{ form_end(edit_form) }}
+      </div>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('personas_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}
