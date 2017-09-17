@@ -36,7 +36,7 @@ class EstadoscivilesController extends Controller
      $resultado=$paginator->paginate(
        $resultado,
        $request->query->getInt('page' ,1),
-       $request->query->getInt('limit' ,10));
+       $request->query->getInt('limit' ,2));
 
         return $this->render('estadosciviles/index.html.twig', array(
             'estadosciviles' => $resultado,

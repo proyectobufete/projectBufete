@@ -96,7 +96,7 @@ fos_elastica:
                 estadosciviles:
                     mappings:
                         estadocivil: ~
-                        estadoestadocivil: ~
+                        Estadoestadocivil: ~
                     persistence:
                         # the driver can be orm, mongodb, phpcr or propel
                         # listener and finder are not supported by
@@ -104,6 +104,20 @@ fos_elastica:
                         identifier: idEstadocivil
                         driver: orm
                         model: BufeteBundle\Entity\Estadosciviles
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                tipocaso:
+                    mappings:
+                        tipo: ~
+                        estadoTipo: ~
+                    persistence:
+                        # the driver can be orm, mongodb, phpcr or propel
+                        # listener and finder are not supported by
+                        # propel and should be removed
+                        identifier: idTipo
+                        driver: orm
+                        model: BufeteBundle\Entity\Tipocaso
                         provider: ~
                         listener: ~
                         finder: ~
