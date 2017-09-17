@@ -121,3 +121,30 @@ fos_elastica:
                         provider: ~
                         listener: ~
                         finder: ~
+                ciudad:
+                    mappings:
+                        postalCiudad: ~
+                        ciudad: ~
+                    persistence:
+                        # the driver can be orm, mongodb, phpcr or propel
+                        # listener and finder are not supported by
+                        # propel and should be removed
+                        identifier: idCiudad
+                        driver: orm
+                        model: BufeteBundle\Entity\Ciudad
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                departamentos:
+                    mappings:
+                        departamento: ~
+                    persistence:
+                        # the driver can be orm, mongodb, phpcr or propel
+                        # listener and finder are not supported by
+                        # propel and should be removed
+                        identifier: idDepartamento
+                        driver: orm
+                        model: BufeteBundle\Entity\Departamentos
+                        provider: ~
+                        listener: ~
+                        finder: ~
