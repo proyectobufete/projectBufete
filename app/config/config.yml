@@ -176,3 +176,29 @@ fos_elastica:
                         provider: ~
                         listener: ~
                         finder: ~
+                trabajos:
+                    mappings:
+                        trabajo: ~
+                    persistence:
+                        # the driver can be orm, mongodb, phpcr or propel
+                        # listener and finder are not supported by
+                        # propel and should be removed
+                        identifier: idTrabajo
+                        driver: orm
+                        model: BufeteBundle\Entity\Trabajos
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                tribunales:
+                    mappings:
+                        tribunal: ~
+                    persistence:
+                        # the driver can be orm, mongodb, phpcr or propel
+                        # listener and finder are not supported by
+                        # propel and should be removed
+                        identifier: idTribunal
+                        driver: orm
+                        model: BufeteBundle\Entity\Tribunales
+                        provider: ~
+                        listener: ~
+                        finder: ~
