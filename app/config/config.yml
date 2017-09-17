@@ -148,3 +148,31 @@ fos_elastica:
                         provider: ~
                         listener: ~
                         finder: ~
+                paises:
+                    mappings:
+                        pais: ~
+                    persistence:
+                        # the driver can be orm, mongodb, phpcr or propel
+                        # listener and finder are not supported by
+                        # propel and should be removed
+                        identifier: idPais
+                        driver: orm
+                        model: BufeteBundle\Entity\Paises
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                bufetes:
+                    mappings:
+                        nombreBufete: ~
+                        telefono1Bufete: ~
+                        telefono2: ~
+                    persistence:
+                        # the driver can be orm, mongodb, phpcr or propel
+                        # listener and finder are not supported by
+                        # propel and should be removed
+                        identifier: idBufete
+                        driver: orm
+                        model: BufeteBundle\Entity\Bufetes
+                        provider: ~
+                        listener: ~
+                        finder: ~

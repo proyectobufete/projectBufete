@@ -9,13 +9,16 @@
 {% block body %}
 <div class="portlet-body">
     <div class="row">
+      <div class="col-md-4">
+        <form method="get" action="" class="form-inline" role="search">
+          <div class="form-group">
+            <input type="text" name="query" value="{{ app.request.get('query') }}" class="form-control" placeholder="Buscar"  />
+          </div>
+          <input type="submit" value="Search" class="btn btn-default">
+        </form>
+      </div>
       <div class="col-md-6">
         <div class="btn-group">
-          <form method="get" action="" class="form-inline" role="search">
-            <div class="form-group">
-              <input type="text" name="query" value="{{ app.request.get('query') }}" class="form-control" placeholder="Buscar" required />
-            </div>
-            <input type="submit" value="Buscar" class="btn btn-default">
                   <a href="{{ path('departamentos_new') }}">
                     <button id="sample_editable_1_new" class="btn green">
                       Agregar Departamento <i class="fa fa-plus"></i>
