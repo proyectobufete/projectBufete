@@ -1,4 +1,6 @@
 {% extends 'layout.html.twig' %}
+{% block act3 %} active {% endblock %}
+{% block ac8 %} active {% endblock %}
 {% block title %}
   <h1>Detalles</h1>
 {% endblock %}
@@ -24,7 +26,7 @@
           </div>
           <div class="row">
             <div class="col-md-7">
-             <textarea class="form-control" style="font-size:18px;" rows="1" value="" id="comment">{{ caso.asunto }}</textarea>
+             <textarea disabled class="form-control" style="font-size:18px;" rows="1" value="" id="comment">{{ caso.asunto }}</textarea>
             </div>
           </div>
           <div class="row">
@@ -37,151 +39,157 @@
           <div class="row">
               <div class="col-md-4">
               <label for="" class=" control-label"><h4><b>Nombre</b></h4></label>
-                <input type="text" style="font-size:19px;"  class="form-control input-lg" value="{{ caso.idDemandante.nombreDemandante }}">
+                <input disabled type="text" style="font-size:19px;"  class="form-control input-lg" value="{{ caso.idDemandante.nombreDemandante }}">
               </div>
               <div class="col-md-1">
               <label for="" class=" control-label"><h4><b>Edad</b></h4></b></label>
-              <input type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idDemandante.edadDemandante }}">
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idDemandante.edadDemandante }}">
               </div>
               <div class="col-md-2">
               <label for="" class=" control-label"><h4><b>Teléfono</b></h4></b></label>
-              <input type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idDemandante.telefonoDemandante }}">
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idDemandante.telefonoDemandante }}">
               </div>
           </div>
           <div class="row">
               <div class="col-md-3">
               <label for="" class=" control-label"><h4><b>DPI</b></h4></label>
-                <input type="text" style="font-size:20px;"  class="form-control input-lg" value="{{ caso.idDemandante.dpiDemandante }}">
+                <input disabled type="text" style="font-size:20px;"  class="form-control input-lg" value="{{ caso.idDemandante.dpiDemandante }}">
               </div>
               <div class="col-md-2">
               <label for="" class=" control-label"><h4><b>Cedula</b></h4></b></label>
-              <input type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idDemandante.cedulaDemandante }}">
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idDemandante.cedulaDemandante }}">
               </div>
               <div class="col-md-2">
               <label for="" class=" control-label"><h4><b>Estado Civil</b></h4></b></label>
-              <input type="text" style="font-size:20px;"  class="form-control input-lg" value="{{ caso.idDemandante.idEstadocivil.estadocivil }}">
+              <input disabled type="text" style="font-size:20px;"  class="form-control input-lg" value="{{ caso.idDemandante.idEstadocivil.estadocivil }}">
               </div>
           </div>
           <div class="row">
               <div class="col-md-2">
               <label for="" class=" control-label"><h4><b>Profesión u Oficio</b></h4></label>
-                <input type="text" style="font-size:20px;"  class="form-control input-lg" value="{{ caso.idDemandante.idTrabajo.trabajo }}">
+                <input disabled type="text" style="font-size:20px;"  class="form-control input-lg" value="{{ caso.idDemandante.idTrabajo.trabajo }}">
               </div>
               <div class="col-md-2">
               <label for="" class=" control-label"><h4><b>Ciudad</b></h4></b></label>
-              <input type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idDemandante.idCiudad.ciudad }}">
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idDemandante.idCiudad.ciudad }}">
               </div>
               <div class="col-md-3">
               <label for="" class=" control-label"><h4><b>Dirección de Trabajo</b></h4></b></label>
-              <input type="text" style="font-size:20px;"  class="form-control input-lg" value="{{ caso.idDemandante.dirtrabajoDemandante }}">
+              <input disabled type="text" style="font-size:20px;"  class="form-control input-lg" value="{{ caso.idDemandante.dirtrabajoDemandante }}">
               </div>
           </div>
           <div class="row">
             <div class="col-md-4">
             <label for="" class=" control-label"><h4><b>Dirección de Recidencia</b></h4></label>
-              <input type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idDemandante.direccionDemandante }}">
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idDemandante.direccionDemandante }}">
             </div>
           </div>
           <div class="row">
             <div class="col-md-6">
               <div class="col-md-offset-5">
-                <label for=""><h3><b>Pretención Procesal</b></h3></label>
+                <label disabled for=""><h3><b>Pretención Procesal</b></h3></label>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-7">
-               <textarea class="form-control" style="font-size:18px;" rows="4" value="" id="comment">{{ caso.civiles.pretencion }}</textarea>
+               <textarea disabled class="form-control" style="font-size:18px;" rows="4" value="" id="comment">{{ caso.civiles.pretencion }}</textarea>
             </div>
           </div>
           <div class="row">
             <div class="col-md-6">
               <div class="col-md-offset-6">
-                <label for=""><h3><b>Pruebas</b></h3></label>
+                <label disabled for=""><h3><b>Pruebas</b></h3></label>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-7">
-               <textarea class="form-control" style="font-size:18px;" rows="4" value="" id="comment">{{ caso.pruebasCaso }}</textarea>
+               <textarea disabled class="form-control" style="font-size:18px;" rows="4" value="" id="comment">{{ caso.pruebasCaso }}</textarea>
             </div>
           </div>
           <div class="row">
             <div class="col-md-6">
               <div class="col-md-offset-5">
-                <label for=""><h3><b>Datos del Demandado</b></h3></label>
+                <label disabled for=""><h3><b>Datos del Demandado</b></h3></label>
               </div>
             </div>
           </div>
           <div class="row">
               <div class="col-md-4">
               <label for="" class=" control-label"><h4><b>Nombre</b></h4></label>
-                <input type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.nombreDemandado }}">
+                <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.nombreDemandado }}">
               </div>
               <div class="col-md-2">
               <label for="" class=" control-label"><h4><b>Teléfono</b></h4></b></label>
-              <input type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.telefonoDemandado }}">
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.telefonoDemandado }}">
               </div>
               <div class="col-md-1">
               <label for="" class=" control-label"><h4><b>Edad</b></h4></b></label>
-              <input type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.otroDemandado }}">
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.otroDemandado }}">
               </div>
           </div>
           <div class="row">
             <div class="col-md-6">
               <div class="col-md-offset-5">
-                <label for=""><h3><b>Datos del Estudiante</b></h3></label>
+                <label disabled for=""><h3><b>Datos del Estudiante</b></h3></label>
               </div>
             </div>
           </div>
           <div class="row">
               <div class="col-md-5">
               <label for="" class=" control-label"><h4><b>Nombre</b></h4></label>
-                <input type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idEstudiante.idPersona.nombrePersona }}">
+                <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idEstudiante.idPersona.nombrePersona }}">
               </div>
               <div class="col-md-2">
               <label for="" class=" control-label"><h4><b>Carné</b></h4></b></label>
-              <input type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idEstudiante.carneEstudiante }}">
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idEstudiante.carneEstudiante }}">
               </div>
           </div>
           <div class="row">
               <div class="col-md-2">
               <label for="" class=" control-label"><h4><b>Teléfono</b></h4></label>
-                <input type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idEstudiante.idPersona.telefonoPersona }}">
+                <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idEstudiante.idPersona.telefonoPersona }}">
               </div>
               <div class="col-md-5">
               <label for="" class=" control-label"><h4><b>Dirección</b></h4></b></label>
-              <input type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idEstudiante.idPersona.direccionPersona }}">
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idEstudiante.idPersona.direccionPersona }}">
               </div>
           </div>
           <div class="row">
             <div class="col-md-6">
               <div class="col-md-offset-5">
-                <label for=""><h3><b>Datos del Asesor</b></h3></label>
+                <label disabled for=""><h3><b>Datos del Asesor</b></h3></label>
               </div>
             </div>
           </div>
           <div class="row">
               <div class="col-md-5">
               <label for="" class=" control-label"><h4><b>Nombre</b></h4></label>
-                <input type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idPersona.nombrePersona }}">
+                <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idPersona.nombrePersona }}">
               </div>
               <div class="col-md-2">
               <label for="" class=" control-label"><h4><b>Teléfono</b></h4></b></label>
-              <input type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idPersona.telefonoPersona }}">
+              <input disabled type="text" style="font-size:18px;"  class="form-control input-lg" value="{{ caso.idPersona.telefonoPersona }}">
               </div>
           </div>
           <br>
-
-          <table>
-            <tr>
-              <a href="{{ path('casos_indexciviles') }}" class="btn default">Regresar</a>
-            </tr>
-            <tr>
-              <a href="{{ path('casos_editcivil', { 'idCaso': caso.idCaso }) }}" class="btn blue">Editar</a>
-            </tr>
-
-          </table>
+          <br>
+            <div class="form-actions">
+              <table>
+                <tr>
+                  <a href="{{ path('casos_indexciviles') }}" class="btn default">Regresar</a>
+                </tr>
+                <tr>
+                  <a href="{{ path('casos_editcivil', { 'idCaso': caso.idCaso }) }}" class="btn blue">Editar</a>
+                </tr>
+                <tr>
+                  <a href="#" class="btn btn-purple">Imprimir</a>
+                </tr>
+              </table>
+            </div>
+            <br>
+            <br>
         </div>
       </div>
 {% endblock %}
