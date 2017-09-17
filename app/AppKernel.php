@@ -18,6 +18,8 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new BufeteBundle\BufeteBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
+
 
         ];
 

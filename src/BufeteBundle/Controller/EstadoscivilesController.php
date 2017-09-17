@@ -18,19 +18,26 @@ class EstadoscivilesController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+      $searchQuery = $request->get('query');
 
-        $estadosciviles = $em->getRepository('BufeteBundle:Estadosciviles')->findAll();
-        /**
-        * @var $paginator \Knp\Component\PagerPaginator
-        */
-        $paginator= $this->get('knp_paginator');
-        $resultado=$paginator->paginate(
-          $estadosciviles,
-          $request->query->getInt('page' ,1),
-          $request->query->getInt('limit' ,2)
+     if(!empty($searchQuery))
+     {
+         $finder = $this->container->get('fos_elastica.finder.bufete.estadosciviles');
+         $resultado = $finder->createPaginatorAdapter($searchQuery);
+     }
+     else
+     {
+         $em = $this->getDoctrine()->getManager();
+         $dql= "SELECT e FROM BufeteBundle:Estadosciviles e";
+         $resultado = $em->createQuery($dql);
+     }
 
-        );
+     $paginator= $this->get('knp_paginator');
+     $resultado=$paginator->paginate(
+       $resultado,
+       $request->query->getInt('page' ,1),
+       $request->query->getInt('limit' ,10));
+
         return $this->render('estadosciviles/index.html.twig', array(
             'estadosciviles' => $resultado,
         ));

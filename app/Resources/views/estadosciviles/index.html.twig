@@ -13,6 +13,12 @@
                     <button id="sample_editable_1_new" class="btn green">
                       Agregar Estado Civil <i class="fa fa-plus"></i>
                     </button></a>
+                    <form method="get" action="" class="form-inline" role="search">
+                      <div class="form-group">
+                        <input type="text" name="query" value="{{ app.request.get('query') }}" class="form-control" placeholder="Buscar" required />
+                      </div>
+                      <input type="submit" value="Search" class="btn btn-default">
+
         </div>
       </div>
 
@@ -42,7 +48,7 @@
   </div>
 </div>
 </div>
-<div class="navigation">
+<div class="navigation text-center">
     {{ knp_pagination_render(estadosciviles) }}
 </div>
 {% endblock %}
