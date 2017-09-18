@@ -1,4 +1,7 @@
 {% extends 'layout.html.twig' %}
+{% block act %} active {% endblock %}
+{% block ac14 %} active {% endblock %}
+
 {% block title %}
   <h1>Listado de Bufetes</h1>
 {% endblock %}
@@ -7,7 +10,15 @@
 <div class="portlet box red-pink">
   <div class="portlet-body">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
+        <form method="get" action="" class="form-inline" role="search">
+          <div class="form-group">
+            <input type="text" name="query" value="{{ app.request.get('query') }}" class="form-control" placeholder="Buscar"  />
+          </div>
+          <input type="submit" value="Search" class="btn btn-default">
+        </form>
+      </div>
+      <div class="col-md-4">
         <div class="btn-group">
           <a href="{{ path('bufetes_new') }}">
 											<button id="sample_editable_1_new" class="btn green">

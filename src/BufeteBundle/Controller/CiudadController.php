@@ -16,17 +16,33 @@ class CiudadController extends Controller
      * Lists all ciudad entities.
      *
      */
-    public function indexAction()
+
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+      $searchQuery = $request->get('query');
 
-        $ciudads = $em->getRepository('BufeteBundle:Ciudad')->findAll();
+     if(!empty($searchQuery))
+     {
+         $finder = $this->container->get('fos_elastica.finder.bufete.ciudad');
+         $resultado = $finder->createPaginatorAdapter($searchQuery);
+     }
+     else
+     {
+         $em = $this->getDoctrine()->getManager();
+         $dql= "SELECT e FROM BufeteBundle:Ciudad e";
+         $resultado = $em->createQuery($dql);
+     }
 
-        return $this->render('ciudad/index.html.twig', array(
-            'ciudads' => $ciudads,
+     $paginator= $this->get('knp_paginator');
+     $resultado=$paginator->paginate(
+       $resultado,
+       $request->query->getInt('page' ,1),
+       $request->query->getInt('limit' ,5));
+
+       return $this->render('ciudad/index.html.twig', array(
+           'ciudads' => $resultado,
         ));
     }
-
     /**
      * Creates a new ciudad entity.
      *

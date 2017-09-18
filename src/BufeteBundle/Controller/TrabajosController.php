@@ -16,17 +16,32 @@ class TrabajosController extends Controller
      * Lists all trabajo entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+      $searchQuery = $request->get('query');
 
-        $trabajos = $em->getRepository('BufeteBundle:Trabajos')->findAll();
+     if(!empty($searchQuery))
+     {
+         $finder = $this->container->get('fos_elastica.finder.bufete.trabajos');
+         $resultado = $finder->createPaginatorAdapter($searchQuery);
+     }
+     else
+     {
+         $em = $this->getDoctrine()->getManager();
+         $dql= "SELECT e FROM BufeteBundle:Trabajos e";
+         $resultado = $em->createQuery($dql);
+     }
+
+     $paginator= $this->get('knp_paginator');
+     $resultado=$paginator->paginate(
+       $resultado,
+       $request->query->getInt('page' ,1),
+       $request->query->getInt('limit' ,5));
 
         return $this->render('trabajos/index.html.twig', array(
-            'trabajos' => $trabajos,
+            'trabajos' => $resultado,
         ));
     }
-
     /**
      * Creates a new trabajo entity.
      *

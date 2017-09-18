@@ -7,19 +7,17 @@ namespace BufeteBundle\Entity;
  */
 class Estadosciviles
 {
-    /**
-     * @var integer
-     */
+      /**
+    * @var integer
+    */
     private $idEstadocivil;
-
     /**
-     * @var string
-     */
+    * @var string
+    */
     private $estadocivil;
-
     /**
-     * @var boolean
-     */
+    * @var boolean
+    */
     private $estadoEstadocivil;
 
 
