@@ -33,13 +33,13 @@ BufeteBundle\Entity\Estudiantes:
             options:
                 unsigned: false
             column: Estado_Estudiante
-    manyToOne:
+    oneToOne:
         idPersona:
             targetEntity: Personas
             cascade: {  }
             fetch: LAZY
             mappedBy: null
-            inversedBy: null
+            inversedBy: estudiantes
             joinColumns:
                 Id_Persona:
                     referencedColumnName: Id_Persona

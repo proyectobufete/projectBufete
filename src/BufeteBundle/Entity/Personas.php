@@ -1,12 +1,20 @@
 <?php
 
 namespace BufeteBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Personas
  */
-class Personas
+class Personas implements UserInterface
 {
+    /**
+     * @ORM\OneToOne(targetEntity="Estudiantes", mappedBy="personas")
+     *
+     */
+     protected $estudiantes;
+
     /**
      * @var integer
      */
@@ -57,6 +65,26 @@ class Personas
      */
     private $idBufete;
 
+    //AUTH
+    public function getUsername()
+    {
+        return $this->usuarioPersona;
+    }
+
+    public function getSalt()
+    {
+       return null;
+    }
+
+    public function getRoles()
+    {
+        return array($this->getRole());
+    }
+
+    public function eraseCredentials(){
+
+    }
+    //END AUTH
 
     /**
      * Get idPersona
@@ -69,12 +97,11 @@ class Personas
     }
 
 
-
       public function __toString()
        {
          return $this->nombrePersona;
        }
-       
+
     /**
      * Set nombrePersona
      *
@@ -220,6 +247,16 @@ class Personas
     }
 
     /**
+     * Get password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->passPersona;
+    }
+
+    /**
      * Set estadoPersona
      *
      * @param boolean $estadoPersona
@@ -290,4 +327,28 @@ class Personas
     {
         return $this->idBufete;
     }
+
+    /**
+     * Set Estudiantes
+     *
+     * @param \BufeteBundle\Entity\Estudiantes $estudiantes
+     * @return Personas
+     */
+    public function setEstudiantes(\BufeteBundle\Entity\Estudiantes $estudiantes = null)
+    {
+      $this->estudiantes = $estudiantes;
+      $estudiantes->setIdPersona($this);
+      return $this;
+    }
+
+    /**
+     * Get estudiantes
+     *
+     * @return \BufeteBundle\Entity\Estudiantes
+     */
+     public function getEstudiantes()
+     {
+       return $this->estudiantes;
+     }
+
 }

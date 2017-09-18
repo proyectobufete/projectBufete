@@ -16,17 +16,32 @@ class DepartamentosController extends Controller
      * Lists all departamento entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+      $searchQuery = $request->get('query');
 
-        $departamentos = $em->getRepository('BufeteBundle:Departamentos')->findAll();
+     if(!empty($searchQuery))
+     {
+         $finder = $this->container->get('fos_elastica.finder.bufete.departamentos');
+         $resultado = $finder->createPaginatorAdapter($searchQuery);
+     }
+     else
+     {
+         $em = $this->getDoctrine()->getManager();
+         $dql= "SELECT e FROM BufeteBundle:Departamentos e";
+         $resultado = $em->createQuery($dql);
+     }
+
+     $paginator= $this->get('knp_paginator');
+     $resultado=$paginator->paginate(
+       $resultado,
+       $request->query->getInt('page' ,1),
+       $request->query->getInt('limit' ,2));
 
         return $this->render('departamentos/index.html.twig', array(
-            'departamentos' => $departamentos,
+            'departamentos' => $resultado,
         ));
     }
-
     /**
      * Creates a new departamento entity.
      *
@@ -78,7 +93,7 @@ class DepartamentosController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('departamentos_edit', array('idDepartamento' => $departamento->getIddepartamento()));
+            return $this->redirectToRoute('departamentos_index', array('idDepartamento' => $departamento->getIddepartamento()));
         }
 
         return $this->render('departamentos/edit.html.twig', array(
