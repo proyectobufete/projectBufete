@@ -41,13 +41,17 @@ class DemandantesController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($demandante);
             $em->flush();
+            $status ="Formulario Valido";
 
-            return $this->redirectToRoute('demandantes_show', array('idDemandante' => $demandante->getIddemandante()));
+            return $this->redirectToRoute('demandantes_show', array('idDemandante' => $demandante->getIdDemandante()));
+        }else{
+            $status = null;
         }
 
         return $this->render('demandantes/new.html.twig', array(
             'demandante' => $demandante,
             'form' => $form->createView(),
+            'status' => $status
         ));
     }
 
@@ -78,7 +82,7 @@ class DemandantesController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('demandantes_edit', array('idDemandante' => $demandante->getIddemandante()));
+            return $this->redirectToRoute('demandantes_index', array('idDemandante' => $demandante->getIddemandante()));
         }
 
         return $this->render('demandantes/edit.html.twig', array(

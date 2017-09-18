@@ -16,17 +16,31 @@ class BufetesController extends Controller
      * Lists all bufete entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+      $searchQuery = $request->get('query');
+     if(!empty($searchQuery))
+     {
+         $finder = $this->container->get('fos_elastica.finder.bufete.bufetes');
+         $resultado = $finder->createPaginatorAdapter($searchQuery);
+     }
+     else
+     {
+         $em = $this->getDoctrine()->getManager();
+         $dql= "SELECT e FROM BufeteBundle:Bufetes e";
+         $resultado = $em->createQuery($dql);
+     }
 
-        $bufetes = $em->getRepository('BufeteBundle:Bufetes')->findAll();
+     $paginator= $this->get('knp_paginator');
+     $resultado=$paginator->paginate(
+       $resultado,
+       $request->query->getInt('page' ,1),
+       $request->query->getInt('limit' ,5));
 
         return $this->render('bufetes/index.html.twig', array(
-            'bufetes' => $bufetes,
+            'bufetes' => $resultado,
         ));
     }
-
     /**
      * Creates a new bufete entity.
      *
@@ -78,7 +92,7 @@ class BufetesController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('bufetes_edit', array('idBufete' => $bufete->getIdbufete()));
+            return $this->redirectToRoute('bufetes_index', array('idBufete' => $bufete->getIdbufete()));
         }
 
         return $this->render('bufetes/edit.html.twig', array(

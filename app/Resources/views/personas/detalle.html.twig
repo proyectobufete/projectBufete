@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Datos Personales</h1>
+
+    <table>
+        <tbody>
+            <tr>
+
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ persona.nombrePersona }}</td>
+            </tr>
+            <tr>
+                <th>Teléfono</th>
+                <td>{{ persona.telefonoPersona }}</td>
+            </tr>
+            <tr>
+                <th>Direccion</th>
+                <td>{{ persona.direccionPersona }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ persona.emailPersona }}</td>
+            </tr>
+            <tr>
+                <th>Usuario</th>
+                <td>{{ persona.usuarioPersona }}</td>
+            </tr>
+            <tr>
+                <th>Contraseña</th>
+                <td>{{ persona.passPersona }}</td>
+            </tr>
+            <tr>
+                <th>Estado de Usuario</th>
+                <td>{% if persona.estadoPersona %}Habilitado{% else %}Deshabilitado{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Tipo de Usuario</th>
+                <td>{{ persona.role }}</td>
+            </tr>
+
+                {% if(persona.estudiantes !=null) %}
+                  {% if(persona.role =="ROLE_ESTUDIANTE") %}
+
+                  <tr>
+                    <th>
+                      <h1>Datos de Estudio</h1>
+                    </th>
+                  </tr>
+
+                    <tr>
+                      <th>Carné</th> <td>{{persona.estudiantes.carneEstudiante}}</td>
+                    </tr>
+                    <tr>
+                      <th>Cierre de Pensum</th> <td>{{persona.estudiantes.cierrePensum}}</td>
+                    </tr>
+                  {% endif %}
+                {% endif %}
+
+
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('personas_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('personas_edit', { 'idPersona': persona.idPersona }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
