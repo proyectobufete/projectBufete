@@ -68,7 +68,12 @@
             <a href="{{ path('personas_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('personas_edit', { 'idPersona': persona.idPersona }) }}">Edit</a>
+          {% if persona.role == "ROLE_ESTUDIANTE" %}
+              <a href="{{ path('personas_editEstudiante', { 'idPersona': persona.idPersona }) }}">Editar</a>
+
+          {% elseif persona.role == "ROLE_ADMIN" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR" or persona.role == "ROLE_ASESOR" %}
+              <a href="{{ path('personas_editPersonal', { 'idPersona': persona.idPersona }) }}">Editar</a>
+          {% endif %}
         </li>
         <li>
             {{ form_start(delete_form) }}
