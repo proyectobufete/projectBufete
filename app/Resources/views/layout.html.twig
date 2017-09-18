@@ -55,6 +55,7 @@
             <!-- Navbar Start -->
             <nav class="navigation">
                 <ul class="list-unstyled">
+                  {% if is_granted('ROLE_ADMIN') %}
                     <li class="has-submenu {% block act %}{% endblock %}"><a href="#"><i class="ion-home"></i> <span class="nav-label">Accion 1</span></a>
                         <ul class="list-unstyled">
                             <li class="{% block ac %}{% endblock %}"><a href="{{path("ciudad_index")}}">Ciudad</a></li>
@@ -62,6 +63,8 @@
                             <li class="{% block ac3 %}{% endblock %}"><a href="{{path("paises_index")}}"> Pais</a></li>
                         </ul>
                     </li>
+                  {% endif %}
+                  {% if is_granted('ROLE_SECRETARIO') %}
                     <li class="has-submenu {% block act2 %}{% endblock %}"><a href="#"><i class="ion-flask"></i> <span class="nav-label">Accion 2</span></a>
                         <ul class="list-unstyled">
                             <li class="{% block ac4 %}{% endblock %}"><a href="{{path("trabajos_index")}}">Trabajos</a></li>
@@ -84,7 +87,7 @@
                             <li class="{% block ac11 %}{% endblock %}"><a href="{{path("personas_indexAsesores")}}">Asesores</a></li>
                         </ul>
                     </li>
-
+                  {% endif %}
                 </ul>
             </nav>
 
