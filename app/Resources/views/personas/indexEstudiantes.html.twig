@@ -39,7 +39,11 @@
                                         <a href="{{ path('personas_detalle', { 'idPersona': persona.idPersona }) }}">Más Detalles</a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('personas_edit', { 'idPersona': persona.idPersona }) }}">Editar</a>
+                                        {% if persona.role == "ROLE_ESTUDIANTE" %}
+                                            <a href="{{ path('personas_editEstudiante', { 'idPersona': persona.idPersona }) }}">Editar</a>
+                                        {% elseif persona.role == "ROLE_ADMIN" or persona.role == "ROLE_SECRETARIO" or persona.role == "ROLE_DIRECTOR" or persona.role == "ROLE_ASESOR" %}
+                                            <a href="{{ path('personas_editPersonal', { 'idPersona': persona.idPersona }) }}">Editar</a>
+                                        {% endif %}
                                     </li>
                                 </ul>
                             </td>
