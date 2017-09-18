@@ -6,6 +6,9 @@ use BufeteBundle\Entity\Paises;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+
+
+
 /**
  * Paise controller.
  *
@@ -16,17 +19,32 @@ class PaisesController extends Controller
      * Lists all paise entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+      $searchQuery = $request->get('query');
 
-        $paises = $em->getRepository('BufeteBundle:Paises')->findAll();
+     if(!empty($searchQuery))
+     {
+         $finder = $this->container->get('fos_elastica.finder.bufete.paises');
+         $resultado = $finder->createPaginatorAdapter($searchQuery);
+     }
+     else
+     {
+         $em = $this->getDoctrine()->getManager();
+         $dql= "SELECT e FROM BufeteBundle:Paises e";
+         $resultado = $em->createQuery($dql);
+     }
+
+     $paginator= $this->get('knp_paginator');
+     $resultado=$paginator->paginate(
+       $resultado,
+       $request->query->getInt('page' ,1),
+       $request->query->getInt('limit' ,5));
 
         return $this->render('paises/index.html.twig', array(
-            'paises' => $paises,
+            'paises' => $resultado,
         ));
     }
-
     /**
      * Creates a new paise entity.
      *
@@ -78,7 +96,7 @@ class PaisesController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('paises_edit', array('idPais' => $paise->getIdpais()));
+            return $this->redirectToRoute('paises_index', array('idPais' => $paise->getIdpais()));
         }
 
         return $this->render('paises/edit.html.twig', array(

@@ -16,16 +16,32 @@ class TipocasoController extends Controller
      * Lists all tipocaso entities.
      *
      */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
+     public function indexAction(Request $request)
+     {
+       $searchQuery = $request->get('query');
 
-        $tipocasos = $em->getRepository('BufeteBundle:Tipocaso')->findAll();
+      if(!empty($searchQuery))
+      {
+          $finder = $this->container->get('fos_elastica.finder.bufete.tipocaso');
+          $resultado = $finder->createPaginatorAdapter($searchQuery);
+      }
+      else
+      {
+          $em = $this->getDoctrine()->getManager();
+          $dql= "SELECT e FROM BufeteBundle:Tipocaso e";
+          $resultado = $em->createQuery($dql);
+      }
 
-        return $this->render('tipocaso/index.html.twig', array(
-            'tipocasos' => $tipocasos,
-        ));
-    }
+      $paginator= $this->get('knp_paginator');
+      $resultado=$paginator->paginate(
+        $resultado,
+        $request->query->getInt('page' ,1),
+        $request->query->getInt('limit' ,10));
+
+         return $this->render('tipocaso/index.html.twig', array(
+             'tipocasos' => $resultado,
+         ));
+     }
 
     /**
      * Creates a new tipocaso entity.
@@ -78,7 +94,7 @@ class TipocasoController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('tipocaso_edit', array('idTipo' => $tipocaso->getIdtipo()));
+            return $this->redirectToRoute('tipocaso_index', array('idTipo' => $tipocaso->getIdtipo()));
         }
 
         return $this->render('tipocaso/edit.html.twig', array(
