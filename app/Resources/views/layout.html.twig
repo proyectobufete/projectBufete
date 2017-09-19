@@ -89,6 +89,14 @@
                         </ul>
                     </li>
                   {% endif %}
+                  {% if is_granted('ROLE_ESTUDIANTE') %}
+                  <li class="has-submenu {% block act20 %}{% endblock %}"><a href="#"><i class="ion-compose"></i> <span class="nav-label">Casos</span></a>
+                      <ul class="list-unstyled">
+                          <li class="{% block ac21 %}{% endblock %}"><a href="{{path("casos_casoslaborales")}}">Laborales</a></li>
+                          <li class="{% block ac22 %}{% endblock %}"><a href="{{path("casos_casosciviles")}}">Civiles</a></li>
+                      </ul>
+                  </li>
+                  {% endif %}
                 </ul>
             </nav>
 
@@ -123,7 +131,7 @@
 
                         </ul>
                     </li>
-                  
+
                     {% endif %}
                     <!-- user login dropdown end -->
                 </ul>

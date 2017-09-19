@@ -30,14 +30,20 @@ security:
                 target: /login
 
     access_control:
-        - { path: ^/personas, roles: ROLE_SECRETARIO}
         - { path: ^/paises, roles: ROLE_ADMIN}
         - { path: ^/departamentos, roles: ROLE_ADMIN}
         - { path: ^/ciudad, roles: ROLE_ADMIN}
+
+        - { path: ^/personas, roles: ROLE_SECRETARIO}
         - { path: ^/bufetes, roles: ROLE_SECRETARIO}
         - { path: ^/trabajos, roles: ROLE_SECRETARIO}
         - { path: ^/tribunales, roles: ROLE_SECRETARIO}
 
+        - { path: ^/casos/laborales, roles: ROLE_SECRETARIO}
+        - { path: ^/casos/civiles, roles: ROLE_SECRETARIO}
+
+        - { path: ^/casos/casoslaborales, roles: ROLE_ESTUDIANTE}
+        - { path: ^/casos/casosciviles, roles: ROLE_ESTUDIANTE}
     role_hierarchy:
         ROLE_DIRECTOR: ROLE_SECRETARIO
             # activate different ways to authenticate
