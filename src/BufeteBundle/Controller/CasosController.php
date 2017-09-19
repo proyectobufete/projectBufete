@@ -34,6 +34,7 @@ class CasosController extends Controller
         ));
     }
 
+
     /**
      * Listar casos civiles.
      *
@@ -54,6 +55,37 @@ class CasosController extends Controller
         ));
     }
 
+    public function laboralesEstudianteAction()
+    {
+        $idEstudiante = $this->getUser()->getEstudiantes()->getIdEstudiante();
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery(
+          "SELECT c FROM BufeteBundle:Casos c
+          INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso
+          WHERE c.idEstudiante = :id"
+        )->setParameter('id', $idEstudiante);
+        $casos = $query->getResult();
+
+        return $this->render('casos/laboralesestudiante.html.twig', array(
+            'casos' => $casos,
+        ));
+    }
+
+    public function civilesEstudianteAction()
+    {
+        $idEstudiante = $this->getUser()->getEstudiantes()->getIdEstudiante();
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery(
+          "SELECT c FROM BufeteBundle:Casos c
+          INNER JOIN BufeteBundle:Civiles l WITH c = l.idCaso
+          WHERE c.idEstudiante = :id"
+        )->setParameter('id', $idEstudiante);
+        $casos = $query->getResult();
+
+        return $this->render('casos/civilesestudiante.html.twig', array(
+            'casos' => $casos,
+        ));
+    }
     /**
      * Creates a new caso entity.
      *
