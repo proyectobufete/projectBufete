@@ -6,11 +6,20 @@ parameters:
 #    parameter_name: value
 
 services:
+    app.autocont:
+        class: BufeteBundle\Services\Autocont
+        arguments: ["null"]
+
+    app.registrocunoc:
+        class: BufeteBundle\Services\Registrocunoc
+        arguments: ['carne']
+        
 #    login_success_handler:
 #        class: BufeteBundle\Services\LoginSuccessHandler
 #        arguments: ["@router", "@security.context"]
 #        tags:
 #            - { name: 'monolog.logger', channel: 'security' }
+
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
