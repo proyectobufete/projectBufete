@@ -24,21 +24,28 @@ security:
             form_login:
                 login_path: /login
                 check_path: /login_check
+                #success_handler: login_success_handler
             logout:
                 path: /logout
                 target: /login
 
     access_control:
+        - { path: ^/paises, roles: ROLE_ADMIN}
+        - { path: ^/departamentos, roles: ROLE_ADMIN}
+        - { path: ^/ciudad, roles: ROLE_ADMIN}
+
         - { path: ^/personas, roles: ROLE_SECRETARIO}
-        - { path: ^/paises, roles: ROLE_SECRETARIO}
-        - { path: ^/departamentos, roles: ROLE_SECRETARIO}
-        - { path: ^/ciudad, roles: ROLE_SECRETARIO}
         - { path: ^/bufetes, roles: ROLE_SECRETARIO}
         - { path: ^/trabajos, roles: ROLE_SECRETARIO}
         - { path: ^/tribunales, roles: ROLE_SECRETARIO}
 
+        - { path: ^/casos/laborales, roles: ROLE_SECRETARIO}
+        - { path: ^/casos/civiles, roles: ROLE_SECRETARIO}
+
+        - { path: ^/casos/casoslaborales, roles: ROLE_ESTUDIANTE}
+        - { path: ^/casos/casosciviles, roles: ROLE_ESTUDIANTE}
     role_hierarchy:
-        ROLE_DIRECTO: ROLE_SECRETARIO
+        ROLE_DIRECTOR: ROLE_SECRETARIO
             # activate different ways to authenticate
 
             # http_basic: ~
