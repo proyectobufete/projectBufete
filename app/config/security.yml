@@ -44,6 +44,8 @@ security:
 
         - { path: ^/casos/casoslaborales, roles: ROLE_ESTUDIANTE}
         - { path: ^/casos/casosciviles, roles: ROLE_ESTUDIANTE}
+        - { path: ^/home, roles: [ROLE_DIRECTOR, ROLE_SECRETARIO, ROLE_ESTUDIANTE]}
+
     role_hierarchy:
         ROLE_DIRECTOR: ROLE_SECRETARIO
             # activate different ways to authenticate

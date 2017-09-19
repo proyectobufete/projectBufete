@@ -21,7 +21,7 @@ logout:
     path: /logout
 
 bufete_homepage:
-    path:     /
+    path:     /home
     defaults: { _controller: BufeteBundle:Default:index }
 
 bufete_departamentos:
