@@ -47,7 +47,6 @@ class PersonasType extends AbstractType
               ),
                 'expanded'  => true,
                 'multiple'  => false,
-          
             ))
             //->add('role')
             ->add('role', ChoiceType::class,array(
@@ -59,7 +58,7 @@ class PersonasType extends AbstractType
                 //'multiple'  => true,
 
             ))
-            ->add('idBufete')
+            //->add('idBufete')
 
             ->add('estudiantes', 'BufeteBundle\Form\EstudiantesType', array(
                 'label'=>'DATOS DE ESTUDIO',
