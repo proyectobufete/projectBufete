@@ -142,7 +142,8 @@ class Estudiantes
 
     public function __toString()
     {
-        return $this->carneEstudiante;
+      $noombre = $this->getIdPersona()->getNombrePersona();
+        return $this->carneEstudiante. " -- ". $noombre;
     }
 
 }
