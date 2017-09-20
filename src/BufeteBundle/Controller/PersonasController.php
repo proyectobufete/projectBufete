@@ -263,7 +263,7 @@ class PersonasController extends Controller
                   $status = "El usuario ya existe";
             }
           } else {
-              $status = "El formulario no es valido registrar";
+              $status = "El formulario no es valido";
           }
           if ($confirm) {
             return $this->redirectToRoute('personas_detalle', array('idPersona' => $persona->getIdPersona()));
