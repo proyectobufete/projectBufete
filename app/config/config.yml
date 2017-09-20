@@ -10,6 +10,7 @@ parameters:
     locale: en
 
 framework:
+    validation: { enable_annotations: true }
     #esi:             ~
     #translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"

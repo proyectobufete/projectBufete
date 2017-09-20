@@ -1,12 +1,22 @@
 <?php
 
 namespace BufeteBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Infofinal
  */
 class Infofinal
 {
+    /**
+     * @Assert\File(
+     *     maxSize = "10000k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Por favor seleccione un archivo en formato PDF"
+     * )
+     */
+    protected $rutaInfo;
+
     /**
      * @var integer
      */
@@ -25,7 +35,7 @@ class Infofinal
     /**
      * @var string
      */
-    private $rutaInfo;
+    /////////////////////////////////////////////////////////private $rutaInfo;
 
     /**
      * @var \BufeteBundle\Entity\Casos
@@ -138,5 +148,20 @@ class Infofinal
     {
         return $this->idCaso;
     }
-}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
