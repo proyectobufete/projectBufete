@@ -28,7 +28,7 @@
           <div class="form-group ">
             <div class="col-md-5">
               {{dump(depas)}}
-            <select id="bufetebundle_ciudad_idDepartamento" name="bufetebundle_ciudad[idDepartamento]" class="selectpicker" data-show-subtext="true" data-live-search="true" >
+            <select id="bufetebundle_ciudad_idDepartamento" name="bufetebundle_ciudad[idDepartamento]" class="selectpicker form-control" data-show-subtext="true" data-live-search="true" >
               {% for dep in depas %}
               <option value="{{ dep.idDepartamento }}">{{ dep.departamento }}</option>
               {% endfor %}

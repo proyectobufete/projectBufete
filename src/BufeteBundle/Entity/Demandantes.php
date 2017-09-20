@@ -220,7 +220,8 @@ class Demandantes
 
     public function __toString()
  {
-   return $this->nombreDemandante;
+   $_dpi = $this->getDpiDemandante();
+   return $_dpi. "  - " .$this->nombreDemandante;
  }
 
     /**
