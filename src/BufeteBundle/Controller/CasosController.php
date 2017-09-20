@@ -22,7 +22,7 @@ class CasosController extends Controller
     }
 
     /**
-     * Lists all caso entities.
+     * Listar casos laborales.
      *
      */
     public function indexLaboralesAction()
@@ -62,6 +62,10 @@ class CasosController extends Controller
         ));
     }
 
+    /**
+     * Listar los casos laborales segun el estudiante logueado
+     *
+     */
     public function laboralesEstudianteAction()
     {
         $idEstudiante = $this->getUser()->getEstudiantes()->getIdEstudiante();
@@ -78,6 +82,10 @@ class CasosController extends Controller
         ));
     }
 
+    /**
+     * Listar los casos civiles segun el estudiante logueado
+     *
+     */
     public function civilesEstudianteAction()
     {
         $idEstudiante = $this->getUser()->getEstudiantes()->getIdEstudiante();
@@ -93,16 +101,18 @@ class CasosController extends Controller
             'casos' => $casos,
         ));
     }
+
     /**
-     * Creates a new caso entity.
+     * Crear nuevo caso laboral.
      *
      */
     public function newLaboralAction(Request $request)
     {
         $caso = new Casos();
         $laboral = new Laborales();
+        $em = $this->getDoctrine()->getManager();
         $caso->setLaborales($laboral);
-        //$user = $this->getUser()->getIdPersona();
+
         $idciudad = $this->getUser()->getIdBufete()->getIdCiudad()->getIdCiudad();
         $idasignatario = $this->getUser()->getIdPersona();
 
@@ -112,7 +122,6 @@ class CasosController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
 
             $tipocaso_repo = $em->getRepository("BufeteBundle:Tipocaso");
             $tipo = $tipocaso_repo->find(2);
