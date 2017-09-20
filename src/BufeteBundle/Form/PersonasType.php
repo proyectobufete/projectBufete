@@ -5,7 +5,7 @@ namespace BufeteBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -47,19 +47,13 @@ class PersonasType extends AbstractType
               ),
                 'expanded'  => true,
                 'multiple'  => false,
-          
             ))
-            //->add('role')
-            ->add('role', ChoiceType::class,array(
-                "label" => "Tipo",
-                    "choices"=> array(
-                        "Estudiante" =>"ROLE_ESTUDIANTE",
-              ),
-                'expanded'  => true,
-                //'multiple'  => true,
 
-            ))
-            ->add('idBufete')
+            ->add('role', HiddenType::class, array(
+    'data' => 'ROLE_ESTUDIANTE',))
+
+            //->add('idBufete')
+
 
             ->add('estudiantes', 'BufeteBundle\Form\EstudiantesType', array(
                 'label'=>'DATOS DE ESTUDIO',
