@@ -1,3 +1,13 @@
+casos_casoslaborales:
+    path:     /casoslaborales
+    defaults: { _controller: "BufeteBundle:Casos:laboralesEstudiante" }
+    methods:  GET
+
+casos_casosciviles:
+    path:     /casosciviles
+    defaults: { _controller: "BufeteBundle:Casos:civilesEstudiante" }
+    methods:  GET
+
 casos_indexlaborales:
     path:     /laborales
     defaults: { _controller: "BufeteBundle:Casos:indexLaborales" }

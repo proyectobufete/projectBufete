@@ -7,12 +7,16 @@
 {% block body %}
 <div class="portlet-body">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-2">
         <form method="get" action="" class="form-inline" role="search">
-          <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="submit" name="buscar" class="btn btn-effect-ripple btn-info">
+                <i class="fa fa-search"></i>
+              </button>
+            </span>
             <input type="text" name="query" value="{{ app.request.get('query') }}" class="form-control" placeholder="Buscar"  />
           </div>
-          <input type="submit" value="Search" class="btn btn-default">
         </form>
       </div>
       <div class="col-md-6">
@@ -23,7 +27,8 @@
                     </button></a>
         </div>
       </div>
-
+      <br>
+      <br>
 
   <div class="col-md-12 col-sm-12 col-xs-6">
       <table class="table table-bordered ">
