@@ -1,94 +1,104 @@
 {% extends 'layout.html.twig' %}
-      {% block title %}
-        <h1>Crear Demandante</h1>
-      {% endblock %}
+{% block act5 %}
+  active
+{% endblock %}
+{% block ac16 %}
+  active
+{% endblock %}
+{% block title %}
+  <h1>Crear Demandante</h1>
+{% endblock %}
 
 {% block body %}
 
-<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js' type='text/javascript'/></script>
+  <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js' type='text/javascript'/></script>
 
-    <div class="portlet-body form">
-      <div id="form_sample_1" class="form-horizontal" >
-        {% if status != null %}
-            <h4> {{ status }} </h4>
-        {% endif %}
+<div class="portlet-body form">
+  <div id="form_sample_1" class="form-horizontal">
+    {% if status != null %}
+      <h4>
+        {{ status }}
+      </h4>
+    {% endif %}
 
-        {{ form_start(form,{'attr':{'role':'form'}}) }}
-        <div class="form-body colorform">
-          <div class="col-md-offset-2">
-            <div class="row">
-              <div class="col-md-5">
-                {{form_label(form.nombreDemandante,'Nombre')}}
-                {{form_errors(form) }}
-                {{form_widget(form.nombreDemandante,{'attr':{'class' : 'form-control'}}) }}
-              </div>
-              <div class="col-md-1">
-                  {{form_label(form.edadDemandante,'Edad')}}
-                  {{form_errors(form) }}
-                  {{form_widget(form.edadDemandante,{'attr':{'class' : 'form-control'}}) }}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-2">
-                {{form_label(form.telefonoDemandante,'Teléfono')}}
-                {{ form_errors(form) }}
-                {{ form_widget(form.telefonoDemandante,{'attr':{'class' : 'form-control'}}) }}
-              </div>
-                <div class="col-md-2">
-                    {{form_label(form.dpiDemandante,'DPI')}}
-                    {{ form_errors(form) }}
-                    {{ form_widget(form.dpiDemandante,{'attr':{'class' : 'form-control'}})}}
-                </div>
-                <div class="col-md-2">
-                  {{form_label(form.cedulaDemandante,'Cedula')}}
-                  {{ form_errors(form) }}
-                  {{ form_widget(form.cedulaDemandante,{'attr':{'class' : 'form-control'}}) }}
-                </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                {{form_label(form.direccionDemandante,'Dirección')}}
-                {{ form_errors(form) }}
-                {{ form_widget(form.direccionDemandante,{'attr':{'class':'form-control'}}) }}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                {{form_label(form.dirtrabajoDemandante,'Direccion de Trabajo')}}
-                {{ form_errors(form) }}
-                {{ form_widget(form.dirtrabajoDemandante,{'attr':{'class' : 'form-control'}}) }}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-2">
-                {{form_label(form.idCiudad,'Ciudad')}}
-                {{ form_errors(form) }}
-                {{ form_widget(form.idCiudad,{'attr':{'class' : 'form-control'}}) }}
-              </div>
-              <div class="col-md-2">
-                {{form_label(form.idEstadocivil,'Estado Civil')}}
-                {{ form_errors(form) }}
-                {{ form_widget(form.idEstadocivil,{'attr':{'class' : 'form-control'}}) }}
-              </div>
-              <div class="col-md-2">
-                {{form_label(form.idTrabajo,'Profesión u Oficio')}}
-                {{ form_errors(form) }}
-                {{ form_widget(form.idTrabajo,{'attr':{'class' : 'form-control'}}) }}
-              </div>
-            </div>
+    {{ form_start(form,{'attr':{'role':'form'}}) }}
+    <div class="form-body colorform">
+      <div class="col-md-offset-2">
+        <div class="row">
+          <div class="col-md-5">
+            {{form_label(form.nombreDemandante,'Nombre')}}
+            {{form_errors(form) }}
+            {{form_widget(form.nombreDemandante,{'attr':{'class' : 'form-control'}}) }}
+          </div>
+          <div class="col-md-1">
+            {{form_label(form.edadDemandante,'Edad')}}
+            {{form_errors(form) }}
+            {{form_widget(form.edadDemandante,{'attr':{'class' : 'form-control'}}) }}
           </div>
         </div>
-        <div class="form-actions">
-          <div class="row">
-            <div class="col-md-offset-2 col-md-9">
-              <button type="submit" name="Create" class="btn green">Crear</button>
-              <a href="{{ path('demandantes_index') }}"><button type="button" name="cancelar" class="btn default">Cancelar</button></a>
-            </div>
+        <div class="row">
+          <div class="col-md-2">
+            {{form_label(form.telefonoDemandante,'Teléfono')}}
+            {{ form_errors(form) }}
+            {{ form_widget(form.telefonoDemandante,{'attr':{'class' : 'form-control'}}) }}
+          </div>
+          <div class="col-md-2">
+            {{form_label(form.dpiDemandante,'DPI')}}
+            {{ form_errors(form) }}
+            {{ form_widget(form.dpiDemandante,{'attr':{'class' : 'form-control'}})}}
+          </div>
+          <div class="col-md-2">
+            {{form_label(form.cedulaDemandante,'Cedula')}}
+            {{ form_errors(form) }}
+            {{ form_widget(form.cedulaDemandante,{'attr':{'class' : 'form-control'}}) }}
           </div>
         </div>
-        {{ form_end(form) }}
+        <div class="row">
+          <div class="col-md-6">
+            {{form_label(form.direccionDemandante,'Dirección')}}
+            {{ form_errors(form) }}
+            {{ form_widget(form.direccionDemandante,{'attr':{'class':'form-control'}}) }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            {{form_label(form.dirtrabajoDemandante,'Direccion de Trabajo')}}
+            {{ form_errors(form) }}
+            {{ form_widget(form.dirtrabajoDemandante,{'attr':{'class' : 'form-control'}}) }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            {{form_label(form.idCiudad,'Ciudad')}}
+            {{ form_errors(form) }}
+            {{ form_widget(form.idCiudad,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
+          </div>
+          <div class="col-md-2">
+            {{form_label(form.idEstadocivil,'Estado Civil')}}
+            {{ form_errors(form) }}
+            {{ form_widget(form.idEstadocivil,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
+          </div>
+          <div class="col-md-2">
+            {{form_label(form.idTrabajo,'Profesión u Oficio')}}
+            {{ form_errors(form) }}
+            {{ form_widget(form.idTrabajo,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
+          </div>
+        </div>
       </div>
     </div>
+    <div class="form-actions">
+      <div class="row">
+        <div class="col-md-offset-2 col-md-9">
+          <button type="submit" name="Create" class="btn green">Crear</button>
+          <a href="{{ path('demandantes_index') }}">
+            <button type="button" name="cancelar" class="btn default">Cancelar</button>
+          </a>
+        </div>
+      </div>
+    </div>
+    {{ form_end(form) }}
+  </div>
+</div>
 
     <script type="text/javascript">
     function cuiIsValid(cui) {
