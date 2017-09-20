@@ -178,8 +178,6 @@ class PersonasController extends Controller
                 }else {
                   $status = "El carne ya esta registrado";
                 }
-
-                  //return $this->redirectToRoute('personas_show', array('idPersona' => $persona->getIdPersona()));
               }
               if ($confirm) {
                 return $this->redirectToRoute('personas_detalle', array('idPersona' => $persona->getIdPersona()));
