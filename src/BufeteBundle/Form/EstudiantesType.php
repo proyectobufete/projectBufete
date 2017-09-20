@@ -24,7 +24,9 @@ class EstudiantesType extends AbstractType
         $builder
             ->add('carneEstudiante',TextType::Class, array ("data"=>$this->carneEnvio))
             ->add('cierrePensum')
-            ->add('estadoEstudiante')
+            ->add('estadoEstudiante', HiddenType::class, array(
+    'data' => '1',))
+
             //->add('idPersona')
         ;
     }
