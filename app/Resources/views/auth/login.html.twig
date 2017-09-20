@@ -1,25 +1,15 @@
 {% extends 'log.html.twig' %}
 
 {% block body %}
-
-{% if is_granted('ROLE_USER') %}
-    <strong>
-      Estas logueado como usuario normal
-    </strong>
-{% endif %}
-
-{% if is_granted('ROLE_ESTUDIANTE') %}
-    <strong>
-      Estas logueado como usuario estudiante
-    </strong>
-{% endif %}
 <form class="login-form" action="{{path("login_check")}}" method="post">
   <h3 class="form-title">Ingresar</h3>
-<!--  <div class="alert alert-danger display-hide">
+  {% if error|length > 0 %}
+  <div class="alert alert-danger display-hide">
     <button class="close" data-close="alert"></button>
     <span>
-    Enter any username and password. </span>
-  </div>-->
+    El nombre de usuario o contraseña no son correctos </span>
+  </div>
+  {% endif %}
   <div class="form-group">
     <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
     <label class="control-label visible-ie8 visible-ie9">Nombre de Usuario</label>
@@ -33,6 +23,5 @@
     <button type="submit" class="btn btn-success uppercase">Entrar</button>
     <input type="hidden" name="_target_path" value="/home" />
   </div>
-
 </form>
 {% endblock %}

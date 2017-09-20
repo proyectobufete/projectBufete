@@ -81,17 +81,6 @@ class PersonasController extends Controller
   }
 
 
-  public function loginAction(Request $request){
-      $authenticationUtils = $this->get("security.authentication_utils");
-      $error = $authenticationUtils->getLastAuthenticationError();
-      $lastUsername = $authenticationUtils->getLastUsername();
-      return $this->render("personas/login.html.twig", array(
-          "error"=> $error,
-          "last_username" => $lastUsername,
-          //"form" => $form->createView()
-      ));
-  }
-
   public function registroAction(Request $request)
   {
           $persona = new Personas();
