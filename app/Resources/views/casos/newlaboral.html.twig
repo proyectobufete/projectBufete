@@ -52,8 +52,11 @@
             </div>
           </div>
           <div class="row">
+            <div class="col-md-4">
+              {{form_widget(form.idDemandante,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
+            </div>
             <div class="col-md-3">
-              {{form_widget(form.idDemandante,{'attr':{'class' : 'form-control'}}) }}
+              <a href="{{ path('demandantes_new') }}"><button type="button" name="cancelar" class="btn btn-purple">Registrar</button></a>
             </div>
           </div>
           <div class="row">
@@ -83,7 +86,7 @@
             </div>
             <div class="col-md-3">
               {{form_label(form.laborales.idTrabajo,' Tabajo Desempeñado')}}
-              {{form_widget(form.laborales.idTrabajo,{'attr':{'class' : 'form-control'}}) }}
+              {{form_widget(form.laborales.idTrabajo,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
             </div>
           </div>
           <div class="row">
@@ -231,17 +234,17 @@
           <div class="row">
             <div class="col-md-3">
               {{form_label(form.idEstudiante,'Nombre del Estudiante')}}
-              {{ form_widget(form.idEstudiante,{'attr':{'class' : 'form-control'}}) }}
+              {{ form_widget(form.idEstudiante,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
             </div>
             <div class="col-md-3">
               {{form_label(form.idPersona,'Nombre del Asesor')}}
-              {{ form_widget(form.idPersona,{'attr':{'class' : 'form-control'}}) }}
+              {{ form_widget(form.idPersona,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
             </div>
           </div>
           <div class="row">
             <div class="col-md-3">
               {{form_label(form.idTribunal,'Tribunal')}}
-              {{ form_widget(form.idTribunal,{'attr':{'class' : 'form-control'}}) }}
+              {{ form_widget(form.idTribunal,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
               {{form_label(form.estadoCaso,'Estado del caso')}}
