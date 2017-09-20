@@ -34,8 +34,6 @@ class CasosController extends Controller
         );
         $casos = $query->getResult();
 
-        //$casos = $em->getRepository('BufeteBundle:Casos')->findAll();
-
         return $this->render('casos/indexlaborales.html.twig', array(
             'casos' => $casos,
         ));
@@ -54,8 +52,6 @@ class CasosController extends Controller
           INNER JOIN BufeteBundle:Civiles ci WITH c = ci.idCaso"
         );
         $casos = $query->getResult();
-
-        //$casos = $em->getRepository('BufeteBundle:Casos')->findAll();
 
         return $this->render('casos/indexciviles.html.twig', array(
             'casos' => $casos,
