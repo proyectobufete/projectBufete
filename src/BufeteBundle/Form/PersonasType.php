@@ -47,12 +47,13 @@ class PersonasType extends AbstractType
               ),
                 'expanded'  => true,
                 'multiple'  => false,
-
             ))
-            //->add('role')
+
             ->add('role', HiddenType::class, array(
     'data' => 'ROLE_ESTUDIANTE',))
-            ->add('idBufete')
+
+            //->add('idBufete')
+
 
             ->add('estudiantes', 'BufeteBundle\Form\EstudiantesType', array(
                 'label'=>'DATOS DE ESTUDIO',

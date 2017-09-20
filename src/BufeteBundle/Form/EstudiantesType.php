@@ -26,6 +26,7 @@ class EstudiantesType extends AbstractType
             ->add('cierrePensum')
             ->add('estadoEstudiante', HiddenType::class, array(
     'data' => '1',))
+
             //->add('idPersona')
         ;
     }
