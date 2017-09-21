@@ -27,6 +27,7 @@
             <th>Teléfono</th>
             <th>Dirección</th>
             <th>Email</th>
+            <th>Bufete</th>
             <th>Opciones</th>
           </tr>
         </thead>
@@ -37,6 +38,7 @@
                 <td>{{ persona.telefonoPersona }}</td>
                 <td>{{ persona.direccionPersona }}</td>
                 <td>{{ persona.emailPersona }}</td>
+                <td>{{ persona.idBufete }}</td>
                   <td>
                     <a href="{{ path('personas_detalle', { 'idPersona': persona.idPersona }) }}" class="btn yellow" >Ver</a>
                     {% if persona.role == "ROLE_ESTUDIANTE" %}
