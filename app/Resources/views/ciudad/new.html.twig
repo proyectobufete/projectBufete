@@ -4,7 +4,6 @@
       {% block title %}
         <h1>Crear Ciudad</h1>
       {% endblock %}
-
 {% block body %}
     <div class="portlet-body form">
       <div id="form_sample_1" class="form-horizontal" >
@@ -19,14 +18,21 @@
           </div>
           <div class="form-group ">
             <div class="col-md-5">
+          <!--
               {{form_label(form.ciudad,'Nombre Ciudad')}}
-              {{ form_widget(form.ciudad,{'attr':{'class' : 'form-control'}}) }}
+              {{ form_widget(form.ciudad,{'attr':{'class' : 'form-control'}}) }}-->
+              <label>Nombre</label>
+              <input type="text" id="bufetebundle_ciudad_ciudad" name="bufetebundle_ciudad[ciudad]" required="required" maxlength="75" class="form-control">
             </div>
           </div>
           <div class="form-group ">
             <div class="col-md-5">
-              {{form_label(form.idDepartamento,'Departamento')}}
-              {{ form_widget(form.idDepartamento,{'attr':{'data-live-search' : true, 'class' : 'form-control'}}) }}
+              {{dump(depas)}}
+            <select id="bufetebundle_ciudad_idDepartamento" name="bufetebundle_ciudad[idDepartamento]" class="selectpicker form-control" data-show-subtext="true" data-live-search="true" >
+              {% for dep in depas %}
+              <option value="{{ dep.idDepartamento }}">{{ dep.departamento }}</option>
+              {% endfor %}
+            </select>
             </div>
           </div>
           <div class="form-group ">
@@ -55,5 +61,4 @@
         {{ form_end(form) }}
       </div>
     </div>
-
 {% endblock %}

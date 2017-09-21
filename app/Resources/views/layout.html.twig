@@ -57,7 +57,7 @@
             <nav class="navigation">
                 <ul class="list-unstyled">
                   {% if is_granted('ROLE_ADMIN') %}
-                    <li class="has-submenu {% block act %}{% endblock %}"><a href="#"><i class="ion-home"></i> <span class="nav-label">Accion 1</span></a>
+                    <li class="has-submenu {% block act %}{% endblock %}"><a href="#"><i class="ion-android-location"></i> <span class="nav-label">Localización</span></a>
                         <ul class="list-unstyled">
                             <li class="{% block ac %}{% endblock %}"><a href="{{path("ciudad_index")}}">Ciudad</a></li>
                             <li class="{% block ac2 %}{% endblock %}"><a href="{{path("departamentos_index")}}"> Departamento</a></li>
@@ -67,7 +67,26 @@
                     </li>
                   {% endif %}
                   {% if is_granted('ROLE_SECRETARIO') %}
-                    <li class="has-submenu {% block act2 %}{% endblock %}"><a href="#"><i class="ion-flask"></i> <span class="nav-label">Accion 2</span></a>
+
+                    <li class="has-submenu  {% block act3 %}{% endblock %}"><a href="#"><i class="ion-android-note"></i> <span class="nav-label">Casos</span></a>
+                        <ul class="list-unstyled">
+                            <li class="{% block ac8 %}{% endblock %}"><a href="{{path("casos_indexciviles")}}">Casos Civiles</a></li>
+                            <li class="{% block ac9 %}{% endblock %}"><a href="{{path("casos_indexlaborales")}}">Casos Laborales</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu  {% block act6 %}{% endblock %}"><a href="#"><i class="ion-android-book"></i> <span class="nav-label">Clínicas</span></a>
+                        <ul class="list-unstyled">
+                            <li class="{% block ac17 %}{% endblock %}"><a href="{{path("clinicas_index")}}">Asignar Clínicas</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu {% block act5 %}{% endblock %}"><a href="#"><i class="ion-android-contact"></i> <span class="nav-label">Personas</span></a>
+                        <ul class="list-unstyled">
+                          <li class="{% block ac16 %}{% endblock %}"><a href="{{path("demandantes_index")}}">Demandantes</a></li>
+                            <li class="{% block ac12 %}{% endblock %}"><a href="{{path("personas_indexEstudiantes")}}">Estudiantes</a></li>
+                            <li class="{% block ac13 %}{% endblock %}"><a href="{{path("personas_indexAsesores")}}">Asesores</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu {% block act2 %}{% endblock %}"><a href="#"><i class="ion-settings"></i> <span class="nav-label">Mantenimiento</span></a>
                         <ul class="list-unstyled">
                             <li class="{% block ac4 %}{% endblock %}"><a href="{{path("trabajos_index")}}">Trabajos</a></li>
                             <li class="{% block ac5 %}{% endblock %}"><a href="{{path("tribunales_index")}}">Tribunales</a></li>
@@ -76,22 +95,9 @@
 
                         </ul>
                     </li>
-
-                    <li class="has-submenu  {% block act3 %}{% endblock %}"><a href="#"><i class="ion-grid"></i> <span class="nav-label">Accion 3</span></a>
-                        <ul class="list-unstyled">
-                            <li class="{% block ac8 %}{% endblock %}"><a href="{{path("casos_indexciviles")}}">Casos Civiles</a></li>
-                            <li class="{% block ac9 %}{% endblock %}"><a href="{{path("casos_indexlaborales")}}">Casos Laborales</a></li>
-                        </ul>
-                    </li>
-                    <li class="has-submenu {% block act5 %}{% endblock %}"><a href="#"><i class="ion-compose"></i> <span class="nav-label">Accion 4</span></a>
-                        <ul class="list-unstyled">
-                            <li class="{% block ac12 %}{% endblock %}"><a href="{{path("personas_indexEstudiantes")}}">Estudiantes</a></li>
-                            <li class="{% block ac13 %}{% endblock %}"><a href="{{path("personas_indexAsesores")}}">Asesores</a></li>
-                        </ul>
-                    </li>
                   {% endif %}
                   {% if is_granted('ROLE_ESTUDIANTE') %}
-                  <li class="has-submenu {% block act20 %}{% endblock %}"><a href="#"><i class="ion-compose"></i> <span class="nav-label">Casos</span></a>
+                  <li class="has-submenu {% block act20 %}{% endblock %}"><a href="#"><i class="ion-android-note"></i> <span class="nav-label">Casos</span></a>
                       <ul class="list-unstyled">
                           <li class="{% block ac21 %}{% endblock %}"><a href="{{path("casos_casoslaborales")}}">Laborales</a></li>
                           <li class="{% block ac22 %}{% endblock %}"><a href="{{path("casos_casosciviles")}}">Civiles</a></li>
@@ -126,9 +132,8 @@
                             <span class="username"><h7><b>{{app.user.nombrePersona}}</b></h7></span> <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu pro-menu fadeInUp animated " tabindex="5003" style="overflow: hidden; outline: none;">
-                            <li><a href="profile.html"><i class="fa fa-briefcase"></i>Profile</a></li>
-                            <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                            <li><a href="{{path("logout")}}"><i class="fa fa-bell"></i> Log Out</a></li>
+                            <li><a href="profile.html"><i class="ion-person-stalker"></i> Perfil</a></li>
+                            <li><a href="{{path("logout")}}"><i class="ion-log-out"></i> Log Out</a></li>
 
                         </ul>
                     </li>

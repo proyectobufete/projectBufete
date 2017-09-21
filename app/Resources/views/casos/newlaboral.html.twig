@@ -18,6 +18,15 @@
       <div class="form-body colorform">
         <div class="col-md-offset-3">
           <div class="row">
+            <div class="col-md-5">
+              {% for message in app.session.flashbag().get('status') %}
+                <div class="alert alert-danger text-center">
+                  <strong>¡Error! </strong>{{message}}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="row">
             <div class="col-md-3">
               {{form_label(form.fechaCaso,'Fecha')}}
               {{form_widget(form.fechaCaso,{'attr':{'class' : 'form-control'}}) }}
@@ -43,8 +52,11 @@
             </div>
           </div>
           <div class="row">
+            <div class="col-md-4">
+              {{form_widget(form.idDemandante,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
+            </div>
             <div class="col-md-3">
-              {{form_widget(form.idDemandante,{'attr':{'class' : 'form-control'}}) }}
+              <a href="{{ path('demandantes_new') }}"><button type="button" name="cancelar" class="btn btn-purple">Registrar</button></a>
             </div>
           </div>
           <div class="row">
@@ -74,7 +86,7 @@
             </div>
             <div class="col-md-3">
               {{form_label(form.laborales.idTrabajo,' Tabajo Desempeñado')}}
-              {{form_widget(form.laborales.idTrabajo,{'attr':{'class' : 'form-control'}}) }}
+              {{form_widget(form.laborales.idTrabajo,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
             </div>
           </div>
           <div class="row">
@@ -86,16 +98,16 @@
               </label>
             </div>
           </div>
-          <div class="col-md-offset-1">
+          <div class="col-md-offset-0">
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <label class="cr-styled">
                   {{ form_widget(form.laborales.vaciones)}}
                   <i class="fa"></i>
                   {{form_label(form.laborales.vaciones,'Vacaciones')}}
                 </label>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <label class="cr-styled">
                   {{ form_widget(form.laborales.diasasueto)}}
                   <i class="fa"></i>
@@ -104,14 +116,14 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <label class="cr-styled">
                   {{ form_widget(form.laborales.indemnizacion)}}
                   <i class="fa"></i>
                   {{form_label(form.laborales.indemnizacion,'Indemnización')}}
                 </label>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <label class="cr-styled">
                   {{ form_widget(form.laborales.aguinaldo)}}
                   <i class="fa"></i>
@@ -120,14 +132,14 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <label class="cr-styled">
                   {{ form_widget(form.laborales.diaseptimos)}}
                   <i class="fa"></i>
                   {{form_label(form.laborales.diaseptimos,'Dias Septimos')}}
                 </label>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <label class="cr-styled">
                   {{ form_widget(form.laborales.reajustesalarial)}}
                   <i class="fa"></i>
@@ -136,14 +148,14 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <label class="cr-styled">
                   {{ form_widget(form.laborales.bonoanual)}}
                   <i class="fa"></i>
                   {{form_label(form.laborales.bonoanual,'Bono Anual')}}
                 </label>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <label class="cr-styled">
                   {{ form_widget(form.laborales.salariosretenidos)}}
                   <i class="fa"></i>
@@ -152,14 +164,14 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <label class="cr-styled">
                   {{ form_widget(form.laborales.horasextra)}}
                   <i class="fa"></i>
                   {{form_label(form.laborales.horasextra,'Horas Extraordinarias')}}
                 </label>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <label class="cr-styled">
                   {{ form_widget(form.laborales.bonoincentivo)}}
                   <i class="fa"></i>
@@ -168,15 +180,24 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-3">
                 {{form_label(form.laborales.otros,'Otros')}}
                 {{ form_widget(form.laborales.otros,{'attr':{'class' : 'form-control'}}) }}
               </div>
             </div>
           </div>
           <div class="row">
+            <div class="col-md-6 col-md-offset-2">
+              <label for="">
+                <h4>
+                  <b>Pruebas</b>
+                </h4>
+              </label>
+            </div>
+          </div>
+          <div class="row">
             <div class="col-md-5">
-              {{form_label(form.pruebasCaso,'Pruebas')}}
+              {{form_label(form.pruebasCaso,' ')}}
               {{ form_widget(form.pruebasCaso,{'attr':{'class' : 'form-control'}}) }}
             </div>
           </div>
@@ -222,17 +243,17 @@
           <div class="row">
             <div class="col-md-3">
               {{form_label(form.idEstudiante,'Nombre del Estudiante')}}
-              {{ form_widget(form.idEstudiante,{'attr':{'class' : 'form-control'}}) }}
+              {{ form_widget(form.idEstudiante,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
             </div>
             <div class="col-md-3">
               {{form_label(form.idPersona,'Nombre del Asesor')}}
-              {{ form_widget(form.idPersona,{'attr':{'class' : 'form-control'}}) }}
+              {{ form_widget(form.idPersona,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
             </div>
           </div>
           <div class="row">
             <div class="col-md-3">
               {{form_label(form.idTribunal,'Tribunal')}}
-              {{ form_widget(form.idTribunal,{'attr':{'class' : 'form-control'}}) }}
+              {{ form_widget(form.idTribunal,{'attr':{'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
               {{form_label(form.estadoCaso,'Estado del caso')}}
@@ -254,9 +275,5 @@
       {{ form_end(form) }}
     </div>
   </div>
-  {% if mensaje != null %}
-    <h4>
-      {{ mensaje }}
-    </h4>
-  {% endif %}
+
 {% endblock %}

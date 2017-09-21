@@ -20,7 +20,7 @@
           <div class="form-group ">
             <div class="col-md-5">
               {{form_label(form.idPais,'Pais')}}
-              {{ form_widget(form.idPais,{'attr':{'class' : 'form-control'}}) }}
+              {{ form_widget(form.idPais,{'attr':{ 'data-live-search' :'true','class' : 'selectpicker form-control'}}) }}
             </div>
           </div>
         </div>

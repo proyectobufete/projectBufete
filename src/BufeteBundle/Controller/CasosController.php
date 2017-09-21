@@ -7,15 +7,22 @@ use BufeteBundle\Entity\Laborales;
 use BufeteBundle\Entity\Civiles;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\HttpFoundation\Session\Session;
 /**
  * Caso controller.
  *
  */
 class CasosController extends Controller
 {
+
+    private $session;
+
+    public function __construct(){
+      $this->session = new Session();
+    }
+
     /**
-     * Lists all caso entities.
+     * Listar casos laborales.
      *
      */
     public function indexLaboralesAction()
@@ -26,8 +33,6 @@ class CasosController extends Controller
           INNER JOIN BufeteBundle:Laborales l WITH c = l.idCaso"
         );
         $casos = $query->getResult();
-
-        //$casos = $em->getRepository('BufeteBundle:Casos')->findAll();
 
         return $this->render('casos/indexlaborales.html.twig', array(
             'casos' => $casos,
@@ -48,13 +53,15 @@ class CasosController extends Controller
         );
         $casos = $query->getResult();
 
-        //$casos = $em->getRepository('BufeteBundle:Casos')->findAll();
-
         return $this->render('casos/indexciviles.html.twig', array(
             'casos' => $casos,
         ));
     }
 
+    /**
+     * Listar los casos laborales segun el estudiante logueado
+     *
+     */
     public function laboralesEstudianteAction()
     {
         $idEstudiante = $this->getUser()->getEstudiantes()->getIdEstudiante();
@@ -71,6 +78,10 @@ class CasosController extends Controller
         ));
     }
 
+    /**
+     * Listar los casos civiles segun el estudiante logueado
+     *
+     */
     public function civilesEstudianteAction()
     {
         $idEstudiante = $this->getUser()->getEstudiantes()->getIdEstudiante();
@@ -86,26 +97,27 @@ class CasosController extends Controller
             'casos' => $casos,
         ));
     }
+
     /**
-     * Creates a new caso entity.
+     * Crear nuevo caso laboral.
      *
      */
     public function newLaboralAction(Request $request)
     {
         $caso = new Casos();
         $laboral = new Laborales();
+        $em = $this->getDoctrine()->getManager();
         $caso->setLaborales($laboral);
-        //$user = $this->getUser()->getIdPersona();
+
         $idciudad = $this->getUser()->getIdBufete()->getIdCiudad()->getIdCiudad();
         $idasignatario = $this->getUser()->getIdPersona();
 
-        $id_estudiante = null; $cantidad = null; $laborales = null; $flush = null; $mensaje = null;
+        $id_estudiante = null; $cantidad = null; $laborales = null; $flush = null; $mensaje = null; $confirm = false;
 
         $form = $this->createForm('BufeteBundle\Form\CasosType', $caso, array('idciudad'=> $idciudad));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
 
             $tipocaso_repo = $em->getRepository("BufeteBundle:Tipocaso");
             $tipo = $tipocaso_repo->find(2);
@@ -132,23 +144,25 @@ class CasosController extends Controller
             if ($laborales < 2) {
               $em->persist($caso);
               $flush = $em->flush();
-              $flush=true;
-                if($flush == true){
+                if($flush == false){
                     $mensaje = "Se registro correctamente el caso";
+                    $confirm = true;
                 } else{
                     $mensaje = "No se pudo registrar correctamente el caso";
                 }
-              return $this->redirectToRoute('casos_showlaboral', array('idCaso' => $caso->getIdcaso()));
             } else {
               $mensaje = "Ha llegado al limite de casos laborales";
+            }
+            if ($confirm) {
+              return $this->redirectToRoute('casos_showlaboral', array('idCaso' => $caso->getIdCaso()));
+            }else {
+              $this->session->getFlashBag()->add("status", $mensaje);
             }
         }
 
         return $this->render('casos/newlaboral.html.twig', array(
             'caso' => $caso,
             'form' => $form->createView(),
-            'mensaje' => $mensaje,
-          //  'usuario' => $user,
         ));
     }
 
@@ -163,7 +177,7 @@ class CasosController extends Controller
         $idciudad = $this->getUser()->getIdBufete()->getIdCiudad()->getIdCiudad();
         $idasignatario = $this->getUser()->getIdPersona();
 
-        $id_estudiante = null; $cantidad = null; $civiles = null; $flush = null; $mensaje = null;
+        $id_estudiante = null; $cantidad = null; $civiles = null; $flush = null; $mensaje = null; $confirm = false;
 
         $form = $this->createForm('BufeteBundle\Form\CasocivilType', $caso, array('idciudad'=> $idciudad));
         $form->handleRequest($request);
@@ -197,21 +211,25 @@ class CasosController extends Controller
             if ($civiles < 1) {
               $em->persist($caso);
               $flush = $em->flush();
-                if($flush == true){
+                if($flush == false){
                     $mensaje = "Se registro correctamente el caso";
+                    $confirm = true;
                 } else{
                     $mensaje = "No se pudo registrar correctamente el caso";
                 }
-              return $this->redirectToRoute('casos_showcivil', array('idCaso' => $caso->getIdcaso()));
             } else {
               $mensaje = "Ha llegado al limite de casos civiles";
+            }
+            if ($confirm) {
+              return $this->redirectToRoute('casos_showcivil', array('idCaso' => $caso->getIdcaso()));
+            }else {
+              $this->session->getFlashBag()->add("status", $mensaje);
             }
         }
 
         return $this->render('casos/newcivil.html.twig', array(
             'caso' => $caso,
             'form' => $form->createView(),
-            'mensaje' => $mensaje,
         ));
     }
 

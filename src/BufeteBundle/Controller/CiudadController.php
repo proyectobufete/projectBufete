@@ -53,6 +53,12 @@ class CiudadController extends Controller
         $form = $this->createForm('BufeteBundle\Form\CiudadType', $ciudad);
         $form->handleRequest($request);
 
+        $dep = $this->getDoctrine()->getManager();
+        $query = $dep->createQuery(
+          "SELECT d FROM BufeteBundle:Departamentos d"
+        );
+        $depa = $query->getResult();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($ciudad);
@@ -63,6 +69,7 @@ class CiudadController extends Controller
 
         return $this->render('ciudad/new.html.twig', array(
             'ciudad' => $ciudad,
+            'depas' => $depa,
             'form' => $form->createView(),
         ));
     }

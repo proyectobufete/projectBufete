@@ -24,6 +24,9 @@ class PersonasController extends Controller
 
   private $session;
 
+  public function __construct(){
+    $this->session = new Session();
+  }
 
   public function indexAsesoresAction()
   {
@@ -78,22 +81,6 @@ class PersonasController extends Controller
   }
 
 
-  public function __construct(){
-    $this->session = new Session();
-  }
-
-
-  public function loginAction(Request $request){
-      $authenticationUtils = $this->get("security.authentication_utils");
-      $error = $authenticationUtils->getLastAuthenticationError();
-      $lastUsername = $authenticationUtils->getLastUsername();
-      return $this->render("personas/login.html.twig", array(
-          "error"=> $error,
-          "last_username" => $lastUsername,
-          //"form" => $form->createView()
-      ));
-  }
-
   public function registroAction(Request $request)
   {
           $persona = new Personas();
@@ -147,7 +134,7 @@ class PersonasController extends Controller
                   ));
 
           $form->handleRequest($request);
-
+          $confirm = null;
           $status=null;
           $unavariable="";
           if ($form->isSubmitted()){
@@ -164,11 +151,13 @@ class PersonasController extends Controller
                         $encoder = $factory->getEncoder($persona);
                         $password = $encoder->encodePassword($form->get("passPersona")->getData(), $persona->getSalt());
                         $persona->setPassPersona($password);
-
+                        $persona->setIdBufete($this->getUser()->getIdBufete());
                         $em->persist($persona);
                         $flush = $em->flush();
                         if ($flush == null) {
                             $status = "El usuario se ha creado correctamente";
+                            $confirm = true;
+
                         } else {
                           $status = "El usuario no se pudo registrar";
                         }
@@ -178,10 +167,13 @@ class PersonasController extends Controller
                 }else {
                   $status = "El carne ya esta registrado";
                 }
-
-                  //return $this->redirectToRoute('personas_show', array('idPersona' => $persona->getIdPersona()));
               }
-          $this->session->getFlashBag()->add("status", $status);
+              if ($confirm) {
+                return $this->redirectToRoute('personas_detalle', array('idPersona' => $persona->getIdPersona()));
+              }else {
+                $this->session->getFlashBag()->add("status", $status);
+              }
+
           }
 
           return $this->render('personas/registro.html.twig', array(
@@ -231,7 +223,7 @@ class PersonasController extends Controller
         $form = $this->createForm('BufeteBundle\Form\PersonasnuevasType', $persona, array(
             'passEnvio' =>$pass,
         ));
-
+        $confirm = false;
         $form->handleRequest($request);
 
         if ($form->isSubmitted()){
@@ -250,17 +242,21 @@ class PersonasController extends Controller
                 $flush = $em->flush();
                 if ($flush == null) {
                     $status = "El usuario se ha creado correctamente";
+                    $confirm = true;
                 } else {
                   $status = "El usuario no se pudo registrar";
                 }
             } else {
                   $status = "El usuario ya existe";
             }
-              //return $this->redirectToRoute('personas_show', array('idPersona' => $persona->getIdpersona()));
           } else {
-              $status = "El usuario no se pudo registrar";
+              $status = "El formulario no es valido";
           }
-          $this->session->getFlashBag()->add("status", $status);
+          if ($confirm) {
+            return $this->redirectToRoute('personas_detalle', array('idPersona' => $persona->getIdPersona()));
+          }else {
+            $this->session->getFlashBag()->add("status", $status);
+          }
 
         }
 
