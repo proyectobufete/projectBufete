@@ -37,7 +37,7 @@ class CiudadController extends Controller
      $resultado=$paginator->paginate(
        $resultado,
        $request->query->getInt('page' ,1),
-       $request->query->getInt('limit' ,5));
+       $request->query->getInt('limit' ,2));
 
        return $this->render('ciudad/index.html.twig', array(
            'ciudads' => $resultado,
