@@ -39,21 +39,17 @@ class InfofinalController extends Controller
         $form = $this->createForm('BufeteBundle\Form\InfofinalType', $infofinal);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
 
 
+
+
             $file = $infofinal->getRutaInfo();
-
-            //dump($file);
-            //die();
-
             if(($file instanceof UploadedFile) && ($file->getError() == '0'))
             {
-
-
               $validator = $this->get('validator');
               $errors = $validator->validate($infofinal);
-
               if (count($errors) > 0) {
                   /*
                    * Uses a __toString method on the $errors variable which is a
@@ -61,23 +57,19 @@ class InfofinalController extends Controller
                    * for debugging.
                    */
                   $errorsString = (string) $errors;
-
                   return new Response($errorsString);
               }
-
-              // Generar un numbre único para el archivo antes de guardarlo
               $fileName = md5(uniqid()).'.'.$file->guessExtension();
-
-
 
               // Mover el archivo al directorio donde se guardan los curriculums
               $cvDir = $this->container->getparameter('kernel.root_dir').'/../web/uploads/final';
               $file->move($cvDir, $fileName);
 
-              // Actualizar la propiedad curriculum para guardar el nombre de archivo PDF
-              // en lugar de sus contenidos
               $infofinal->setrutaInfo($fileName);
+              
+
             }
+
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($infofinal);
