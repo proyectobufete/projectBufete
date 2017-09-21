@@ -36,4 +36,7 @@
             <a href="{{ path('civiles_new') }}">Create a new civile</a>
         </li>
     </ul>
+    <div class="navigation text-center">
+      {{ knp_pagination_render(civiles) }}
+    </div>
 {% endblock %}

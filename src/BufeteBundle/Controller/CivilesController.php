@@ -19,15 +19,30 @@ class CivilesController extends Controller
      * Lists all civile entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $searchQuery = $request->get('query');
+       if(!empty($searchQuery))
+       {
+           $finder = $this->container->get('fos_elastica.finder.bufete.civiles');
+           $resultado = $finder->createPaginatorAdapter($searchQuery);
+       }
+       else
+       {
+           $em = $this->getDoctrine()->getManager();
+           $dql= "SELECT e FROM BufeteBundle:Civiles e";
+           $resultado = $em->createQuery($dql);
+       }
 
-        $civiles = $em->getRepository('BufeteBundle:Civiles')->findAll();
+       $paginator= $this->get('knp_paginator');
+       $resultado=$paginator->paginate(
+         $resultado,
+         $request->query->getInt('page' ,1),
+         $request->query->getInt('limit' ,1));
 
-        return $this->render('civiles/index.html.twig', array(
-            'civiles' => $civiles,
-        ));
+          return $this->render('civiles/index.html.twig', array(
+              'civiles' => $resultado,
+          ));
     }
 
     /**

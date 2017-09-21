@@ -44,18 +44,33 @@ class CasosController extends Controller
      * Listar casos civiles.
      *
      */
-    public function indexCivilesAction()
+    public function indexCivilesAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery(
-          "SELECT c FROM BufeteBundle:Casos c
-          INNER JOIN BufeteBundle:Civiles ci WITH c = ci.idCaso"
-        );
-        $casos = $query->getResult();
 
-        return $this->render('casos/indexciviles.html.twig', array(
-            'casos' => $casos,
-        ));
+        $searchQuery = $request->get('query');
+       if(!empty($searchQuery))
+       {
+           $finder = $this->container->get('fos_elastica.finder.bufete.civiles');
+           $resultado = $finder->createPaginatorAdapter($searchQuery);
+       }
+       else
+       {
+           $em = $this->getDoctrine()->getManager();
+           $dql= "SELECT c FROM BufeteBundle:Casos c INNER JOIN BufeteBundle:Civiles ci WITH c = ci.idCaso";
+           $resultado = $em->createQuery($dql);
+       }
+
+       $paginator= $this->get('knp_paginator');
+       $resultado=$paginator->paginate(
+         $resultado,
+         $request->query->getInt('page' ,1),
+         $request->query->getInt('limit' ,100));
+
+          return $this->render('casos/indexciviles.html.twig', array(
+              'casos' => $resultado,
+          ));
+
+
     }
 
     /**

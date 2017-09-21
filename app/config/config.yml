@@ -202,3 +202,17 @@ fos_elastica:
                         provider: ~
                         listener: ~
                         finder: ~
+                civiles:
+                    mappings:
+                        pretencion: ~
+                        idCaso: ~
+                    persistence:
+                        # the driver can be orm, mongodb, phpcr or propel
+                        # listener and finder are not supported by
+                        # propel and should be removed
+                        identifier: idCivil
+                        driver: orm
+                        model: BufeteBundle\Entity\Casos
+                        provider: ~
+                        listener: ~
+                        finder: ~
