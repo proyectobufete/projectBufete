@@ -12,7 +12,7 @@ bufete_paises:
 
 login:
     path: /login
-    defaults: {_controller: BufeteBundle:Personas:login}
+    defaults: {_controller: BufeteBundle:Auth:login}
 
 login_check:
     path: /login_check
