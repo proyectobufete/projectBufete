@@ -318,7 +318,9 @@ class Casos
 
 public function __toString()
 {
-return $this->asunto;
+  //$numcaso = (String)$this->noCaso;
+  //return $numcaso;
+  return $this->asunto;
 }
 
     /**

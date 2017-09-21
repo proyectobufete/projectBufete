@@ -1,0 +1,9 @@
+# BufeteBundle/Resources/config/validation.yml
+
+BufeteBundle\Entity\infoFinal:
+    properties:
+        rutaInfo:
+            - File:
+                maxSize: 50000k
+                mimeTypes: [application/pdf, application/x-pdf]
+                mimeTypesMessage: Please upload a valid PDF

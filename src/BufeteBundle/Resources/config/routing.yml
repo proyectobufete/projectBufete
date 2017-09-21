@@ -87,3 +87,7 @@ bufete_personas:
 bufete_estudiantes:
         resource: "@BufeteBundle/Resources/config/routing/estudiantes.yml"
         prefix:   /estudiantes
+
+bufete_infofinal:
+        resource: "@BufeteBundle/Resources/config/routing/infofinal.yml"
+        prefix:   /infofinal
