@@ -36,7 +36,7 @@ class TribunalesController extends Controller
      $resultado=$paginator->paginate(
        $resultado,
        $request->query->getInt('page' ,1),
-       $request->query->getInt('limit' ,5));
+       $request->query->getInt('limit' ,10));
 
         return $this->render('tribunales/index.html.twig', array(
             'tribunales' => $resultado,

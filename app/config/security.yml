@@ -47,7 +47,7 @@ security:
         - { path: ^/home, roles: [ROLE_DIRECTOR, ROLE_SECRETARIO, ROLE_ESTUDIANTE]}
 
     role_hierarchy:
-        ROLE_DIRECTOR: ROLE_SECRETARIO
+        ROLE_ADMIN: ROLE_SECRETARIO
             # activate different ways to authenticate
 
             # http_basic: ~
