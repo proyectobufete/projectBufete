@@ -56,6 +56,34 @@ class DemandantesController extends Controller
     }
 
     /**
+     * modal para nuevo demandante
+     *
+     */
+    public function modalnewAction(Request $request)
+    {
+        $demandante = new Demandantes();
+        $form = $this->createForm('BufeteBundle\Form\DemandantesType', $demandante);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($demandante);
+            $em->flush();
+            $status ="Formulario Valido";
+
+            return $this->redirectToRoute('demandantes_show', array('idDemandante' => $demandante->getIdDemandante()));
+        }else{
+            $status = null;
+        }
+
+        return $this->render('demandantes/modalNew.html.twig', array(
+            'demandante' => $demandante,
+            'form' => $form->createView(),
+            'status' => $status
+        ));
+    }
+
+    /**
      * Finds and displays a demandante entity.
      *
      */

@@ -13,6 +13,11 @@ demandantes_new:
     defaults: { _controller: "BufeteBundle:Demandantes:new" }
     methods:  [GET, POST]
 
+demandantes_modalnew:
+    path:     /modalnew
+    defaults: { _controller: "BufeteBundle:Demandantes:modalnew" }
+    methods:  [GET, POST]
+
 demandantes_edit:
     path:     /{idDemandante}/edit
     defaults: { _controller: "BufeteBundle:Demandantes:edit" }

@@ -1,40 +1,56 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'layout.html.twig' %}
+{% block act6 %}
+  active
+{% endblock %}
+{% block ac17 %}
+  active
+{% endblock %}
+{% block title %}
+  <h1>Detalles</h1>
+{% endblock %}
 {% block body %}
-    <h1>Clinica</h1>
+      <div class="portlet-body">
+        <div id="sample_1_wrapper" class="dataTable_wrapper table-responsive">
+          <div class="col-md-4">
+          <table class="table table-striped table-bordered table-hover dataTable no-footer">
+            <tbody>
+                <tr>
+                    <th>Idclinica</th>
+                    <td>{{ clinica.idClinica }}</td>
+                </tr>
+                <tr>
+                    <th>Estudinate</th>
+                    <td>{{ clinica.idEstudiante }}</td>
+                </tr>
+                <tr>
+                    <th>Fechaasignacion</th>
+                    <td>{% if clinica.fechaAsignacion %}{{ clinica.fechaAsignacion|date('Y-m-d') }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Fechafin</th>
+                    <td>{% if clinica.fechaFin %}{{ clinica.fechaFin|date('Y-m-d') }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Estadoclinica</th>
+                    <td>{{ clinica.estadoClinica }}</td>
+                </tr>
+            </tbody>
+          </table>
 
-    <table>
-        <tbody>
+          <table>
             <tr>
-                <th>Idclinica</th>
-                <td>{{ clinica.idClinica }}</td>
+              <a href="{{ path('clinicas_index') }}" class="btn  default">Regresar</a>
             </tr>
             <tr>
-                <th>Fechaasignacion</th>
-                <td>{% if clinica.fechaAsignacion %}{{ clinica.fechaAsignacion|date('Y-m-d') }}{% endif %}</td>
+              <a href="{{ path('clinicas_edit', { 'idClinica': clinica.idClinica }) }}" class="btn blue">Editar</a>
             </tr>
             <tr>
-                <th>Fechafin</th>
-                <td>{% if clinica.fechaFin %}{{ clinica.fechaFin|date('Y-m-d') }}{% endif %}</td>
+              {{ form_start(delete_form) }}
+                  <button type="submit" class="btn  red" name="Delete">Eliminar</button>
+              {{ form_end(delete_form) }}
             </tr>
-            <tr>
-                <th>Estadoclinica</th>
-                <td>{{ clinica.estadoClinica }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('clinicas_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('clinicas_edit', { 'idClinica': clinica.idClinica }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+          </table>
+          </div>
+        </div>
+      </div>
 {% endblock %}
