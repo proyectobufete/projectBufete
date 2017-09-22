@@ -22,7 +22,8 @@ class InfofinalType extends AbstractType
           ->add('fechaInfo')
           ->add('observaciones')
           ->add('rutaInfo',FileType::class, array('data_class' => null))
-          ->add('idCaso');
+          //->add('idCaso')
+          ;
     }
 
     /**

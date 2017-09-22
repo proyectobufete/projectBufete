@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use BufeteBundle\Entity\Casos;
 /**
  * Infofinal controller.
  *
@@ -29,6 +29,8 @@ class InfofinalController extends Controller
         ));
     }
 
+
+
     /**
      * Creates a new infofinal entity.
      *
@@ -36,13 +38,21 @@ class InfofinalController extends Controller
     public function newAction(Request $request)
     {
         $infofinal = new Infofinal();
+        $caso = new Casos();
         $form = $this->createForm('BufeteBundle\Form\InfofinalType', $infofinal);
         $form->handleRequest($request);
 
+        $var=$request->query->get("idCaso");
+        $nuevavar = (int)$var;
+        $idrecibido=$var;
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+          $em = $this->getDoctrine()->getManager();
 
+          $caso_repo = $em->getRepository("BufeteBundle:Casos");
+          $idCaso = $caso_repo->find($idrecibido);
+          $infofinal->setIdCaso($idCaso);
 
 
             $file = $infofinal->getRutaInfo();
@@ -66,7 +76,7 @@ class InfofinalController extends Controller
               $file->move($cvDir, $fileName);
 
               $infofinal->setrutaInfo($fileName);
-              
+
 
             }
 
@@ -98,6 +108,28 @@ class InfofinalController extends Controller
         ));
     }
 
+    public function revisonestudianteAction(Request $request)
+    {
+
+      $var=$request->query->get("idCaso");
+      $nuevavar = (int)$var;
+      $idrecibido=$var;
+
+
+
+      $em = $this->getDoctrine()->getManager();
+
+      $query = $em->CreateQuery(
+          "SELECT p FROM BufeteBundle:Infofinal p
+          WHERE p.idCaso = ".$idrecibido
+        );
+
+        $revisiones = $query->getResult();
+
+        return $this->render('infofinal/revisonestudiante.html.twig', array(
+          'revisiones' => $revisiones,
+        ));
+    }
     /**
      * Displays a form to edit an existing infofinal entity.
      *

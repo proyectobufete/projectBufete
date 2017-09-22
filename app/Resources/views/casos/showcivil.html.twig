@@ -196,6 +196,10 @@
                   <tr>
                     <a href="{{ path('infofinal_new', { 'idCaso': caso.idCaso}) }}" class="btn btn-purple">Agregar Revision</a>
                   </tr>
+                  <tr>
+                    <a href="{{ path('infofinal_revisonestudiante', { 'idCaso': caso.idCaso}) }}" class="btn btn-Black">Ver Revision</a>
+                  </tr>
+
                 {% endif %}
                 {% if is_granted('ROLE_SECRETARIO') or is_granted('ROLE_DIRECTOR') or is_granted('ROLE_ADMIN') %}
                   <tr>

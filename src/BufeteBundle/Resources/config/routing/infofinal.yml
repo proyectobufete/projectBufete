@@ -3,6 +3,11 @@ infofinal_index:
     defaults: { _controller: "BufeteBundle:Infofinal:index" }
     methods:  GET
 
+infofinal_revisonestudiante:
+    path:     /revisonestudiante
+    defaults: { _controller: "BufeteBundle:Infofinal:revisonestudiante" }
+    methods:  GET
+
 infofinal_show:
     path:     /{idIfno}/show
     defaults: { _controller: "BufeteBundle:Infofinal:show" }
