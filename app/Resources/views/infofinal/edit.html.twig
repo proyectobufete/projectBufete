@@ -3,8 +3,16 @@
 {% block body %}
     <h1>Infofinal edit</h1>
 
+    <a href="{{ asset ('uploads/final/'~infofinal.rutaInfo) }}" download>
+        <img src="{{ asset ('uploads/final/pdf.png')}}" width="28" height="30">
+        {{ asset (infofinal.rutaInfo) }}
+    </a>
+
     {{ form_start(edit_form, {'enctype':'multipart/form-data'}) }}
         {{ form_widget(edit_form) }}
+
+
+
         <input type="submit" value="Edit" />
     {{ form_end(edit_form) }}
 

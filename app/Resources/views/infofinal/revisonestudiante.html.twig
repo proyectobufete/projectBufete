@@ -19,7 +19,14 @@
                 <td><a href="{{ path('infofinal_show', { 'idIfno': infofinal.idIfno }) }}">{{ infofinal.idIfno }}</a></td>
                 <td>{% if infofinal.fechaInfo %}{{ infofinal.fechaInfo|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ infofinal.observaciones }}</td>
-                <td><a href="{{ asset ('upload/final/'~infofinal.rutaInfo) }}"/>Ver</a></td>
+                <td>
+                  <a href="{{ asset ('uploads/final/'~infofinal.rutaInfo) }}" download>
+                      <img src="{{ asset ('uploads/final/pdf.png')}}" width="28" height="30">
+                  </a>
+
+                </td>
+
+
                 <td>
                     <ul>
                         <li>

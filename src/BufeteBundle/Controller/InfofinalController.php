@@ -136,6 +136,15 @@ class InfofinalController extends Controller
      */
     public function editAction(Request $request, Infofinal $infofinal)
     {
+
+        $ruta = $infofinal->getRutaInfo();
+        //echo $ruta;
+        //die();
+
+        $quien = $infofinal->getidCaso()->getidEstudiante()->getidEstudiante();
+        //echo $quien;
+        //die();
+
         $deleteForm = $this->createDeleteForm($infofinal);
         $editForm = $this->createForm('BufeteBundle\Form\InfofinalType', $infofinal);
         $editForm->handleRequest($request);
@@ -147,6 +156,7 @@ class InfofinalController extends Controller
         }
 
         return $this->render('infofinal/edit.html.twig', array(
+            'rutaEnvio' => $ruta,
             'infofinal' => $infofinal,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

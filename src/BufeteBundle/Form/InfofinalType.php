@@ -18,10 +18,11 @@ class InfofinalType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $this->rutaEnvio = $options['rutaEnvio'];
         $builder
-          ->add('fechaInfo')
+          ->add('rutaInfo',FileType::class, array('data_class' => null, 'data'=>$this->rutaEnvio))
           ->add('observaciones')
-          ->add('rutaInfo',FileType::class, array('data_class' => null))
+          ->add('fechaInfo')
           //->add('idCaso')
           ;
     }
@@ -32,7 +33,8 @@ class InfofinalType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BufeteBundle\Entity\Infofinal'
+            'data_class' => 'BufeteBundle\Entity\Infofinal',
+            'rutaEnvio'=> null,
         ));
     }
 

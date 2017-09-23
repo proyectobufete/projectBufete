@@ -13,7 +13,7 @@ services:
     app.registrocunoc:
         class: BufeteBundle\Services\Registrocunoc
         arguments: ['carne']
-        
+      
 #    login_success_handler:
 #        class: BufeteBundle\Services\LoginSuccessHandler
 #        arguments: ["@router", "@security.context"]
